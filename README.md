@@ -51,9 +51,12 @@ notification-bubble-app/
 │   └── skills.json                  # Workspace skill registration
 ├── ai-skills/                       # Agent Skills library (21 skills across 6 phases)
 ├── documents/                       # Phase 1 & product strategy documentation
+│   ├── PROJECT_PROGRESS_TRACKER.md
 │   ├── PRODUCT_INTAKE_QUESTIONNAIRE.md
 │   ├── IDEA_BRUTAL_AUDIT.md
 │   ├── MARKET_RESEARCH_GAP_ANALYSIS.md
+│   ├── GENRE_TRENDS_RADAR.md
+│   ├── FEASIBILITY_UNIT_ECONOMICS.md
 │   └── MONETIZATION_STRATEGY_OPTIONS.md
 ├── AGENTS.md                        # Agent guidelines & commit conventions
 ├── .gitignore                       # Git ignore rules for Android, Python, and OS junk
