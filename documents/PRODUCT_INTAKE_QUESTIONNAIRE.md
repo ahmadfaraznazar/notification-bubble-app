@@ -250,3 +250,14 @@ i dont know yet.
 - **R8 Full Optimization**: `isMinifyEnabled = true` and `isShrinkResources = true` in release builds to strip unreferenced classes and assets.
 - **Vector Assets Only**: XML Vector Drawables for all UI icons/shapes (~1KB each) instead of multi-density PNGs.
 - **Strict Zero-Bloat Dependency Diet**: No third-party ad networks, no heavy analytics SDKs, and targeted icon imports only.
+
+### 8.5 Local Device Testing & Deployment Preference:
+<!-- How will builds be tested without physical USB cables? -->
+
+**Answer:**
+- **Cable-Free Direct APK Testing (Method 2 Selected)**:
+  - No physical USB cable connections required.
+  - When testable APKs are compiled (`app-debug.apk`), deploy via either:
+    1. Local Python HTTP server (`python3 -m http.server 8080`) accessed via phone browser on local Wi-Fi.
+    2. Direct file transfer via Telegram (Saved Messages) or WhatsApp Web.
+- **Timing / Trigger**: The assistant will explicitly notify the user to install and test only when **Milestone 0 (Task 02: Floating Bubble Spike)** is compiled and ready for live verification.
