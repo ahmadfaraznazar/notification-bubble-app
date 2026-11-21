@@ -1,7 +1,7 @@
 # Adversarial Pre-Mortem & Idea Brutal Audit
 
 > **Target Concept**: Floating Notification Bubble App ("Chat Heads for Everything")  
-> **Source Document**: [PRODUCT_INTAKE_QUESTIONNAIRE.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/PRODUCT_INTAKE_QUESTIONNAIRE.md)  
+> **Source Document**: [PRODUCT_INTAKE_QUESTIONNAIRE.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/PRODUCT_INTAKE_QUESTIONNAIRE.md)  
 > **Auditor**: Red-Team Architecture & Product Adversary (`idea-brutal-audit`)  
 > **Date**: 2026-11-21  
 

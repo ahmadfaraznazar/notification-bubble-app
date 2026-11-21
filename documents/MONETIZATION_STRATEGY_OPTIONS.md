@@ -1,6 +1,6 @@
 # Monetization Strategy & Model Options: Notification Bubble App
 
-> **Purpose**: This document outlines the evaluation and choices for Problem 5 from the Adversarial Audit ([IDEA_BRUTAL_AUDIT.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/IDEA_BRUTAL_AUDIT.md)). Fill in your preferred decision directly in this document or in chat whenever you return.
+> **Purpose**: This document outlines the evaluation and choices for Problem 5 from the Adversarial Audit ([IDEA_BRUTAL_AUDIT.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/IDEA_BRUTAL_AUDIT.md)). Fill in your preferred decision directly in this document or in chat whenever you return.
 
 ---
 
@@ -76,5 +76,5 @@ Please select or customize your direction below:
 
 ## 5. Next Steps Upon Return
 1. Confirm your choice above.
-2. Update **Sections 5.1 & 7.1** in [PRODUCT_INTAKE_QUESTIONNAIRE.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/PRODUCT_INTAKE_QUESTIONNAIRE.md).
+2. Update **Sections 5.1 & 7.1** in [PRODUCT_INTAKE_QUESTIONNAIRE.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/PRODUCT_INTAKE_QUESTIONNAIRE.md).
 3. Commit the updated questionnaire and proceed to **Step 2 of Phase 1 (`market-research-scout`)**.
