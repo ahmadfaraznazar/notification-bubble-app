@@ -53,15 +53,15 @@
 ---
 
 ### Phase 3: Architecture & Tech (`ai-skills/03-architecture-and-tech/`)
-- **Current Status**: **In Progress (Step 3.3 Complete)**
+- **Current Status**: **In Progress (Step 3.4 Complete)**
 
 | Step | Skill Activated | Focus & Deliverable | Status | Artifact / Document |
 |:---:|---|---|:---:|---|
 | **3.1** | `clean-architecture-enforcer` | UDF state boundaries, Service ➔ Domain ➔ UI separation, zero `android.*` in domain | **COMPLETED** | [documents/03-architecture-and-tech/CLEAN_ARCHITECTURE_SPECIFICATION.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/03-architecture-and-tech/CLEAN_ARCHITECTURE_SPECIFICATION.md) |
 | **3.2** | `tech-and-library-selector` | Pinned dependency BOM, Coil, Room SQLite, KSP, < 5MB APK size audit | **COMPLETED** | [documents/03-architecture-and-tech/TECH_AND_LIBRARY_SELECTION.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/03-architecture-and-tech/TECH_AND_LIBRARY_SELECTION.md) |
 | **3.3** | `android-best-practices` | 120Hz zero-allocation touch loops, `START_STICKY` foreground survival, Compose stability | **COMPLETED** | [documents/03-architecture-and-tech/ANDROID_BEST_PRACTICES_SPECIFICATION.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/03-architecture-and-tech/ANDROID_BEST_PRACTICES_SPECIFICATION.md) |
-| **3.4** | `api-and-data-modeling` | Local Room schema for conversation queues and per-app whitelist toggles | **CURRENT** | PENDING |
-| **3.5** | `security-and-privacy-audit` | Zero-network manifest enforcement, sensitive notification/OTP redaction | PENDING | &mdash; |
+| **3.4** | `api-and-data-modeling` | Room SQLite entities, sub-ms indexed whitelist lookups, offline purchase storage | **COMPLETED** | [documents/03-architecture-and-tech/DATA_MODELING_AND_ROOM_SCHEMA.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/03-architecture-and-tech/DATA_MODELING_AND_ROOM_SCHEMA.md) |
+| **3.5** | `security-and-privacy-audit` | Zero-network manifest enforcement, sensitive notification/OTP redaction | **CURRENT** | PENDING |
 
 ---
 

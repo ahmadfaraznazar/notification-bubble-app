@@ -66,7 +66,8 @@ notification-bubble-app/
 │   └── 03-architecture-and-tech/    # Phase 3 Architecture & Technical Contracts
 │       ├── CLEAN_ARCHITECTURE_SPECIFICATION.md
 │       ├── TECH_AND_LIBRARY_SELECTION.md
-│       └── ANDROID_BEST_PRACTICES_SPECIFICATION.md
+│       ├── ANDROID_BEST_PRACTICES_SPECIFICATION.md
+│       └── DATA_MODELING_AND_ROOM_SCHEMA.md
 ├── AGENTS.md                        # Agent guidelines & commit conventions
 ├── .gitignore                       # Git ignore rules for Android, Python, and OS junk
 └── README.md                        # Project documentation
