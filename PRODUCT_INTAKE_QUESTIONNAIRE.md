@@ -83,15 +83,23 @@ Stacked bubbles like Facebook Messenger chat heads.
 -->
 
 **Answer:**
-
-I have decided that all apps will be supported by default. User can select which apps they want to see notifications for and which dont.
+Hybrid Onboarding Wizard with Intelligent Category Filtering:
+- **Zero Apps Selected by Default**: On initial launch, 0 apps are enabled by default so the user is never spammed with unexpected bubbles.
+- **Onboarding App Picker & Presets**: During first setup, present the user with their installed and most-used communication apps alongside 1-tap presets:
+  - `[Chats Only]` (WhatsApp, Telegram, Signal, SMS, Discord, Slack, Messenger)
+  - `[Social Media]` (Instagram, X/Twitter, Reddit)
+  - `[Custom Selection]` (Searchable checklist of all installed apps)
+- **Intelligent Message Classification (Category C Hybrid)**: For selected apps, automatically prioritize person-to-person communication (`Notification.CATEGORY_MESSAGE` and `CATEGORY_CALL`) while ignoring ongoing/silent noise (download progress, music players, marketing promos) unless explicitly overridden.
 
 ### 3.2 Should there be smart "Do Not Disturb" or "Auto-Hide" rules?
 
 <!-- e.g., Auto-hide when a full-screen game or YouTube is running in landscape? Auto-hide when the virtual keyboard is open? -->
 
 **Answer:**
-Sure. Havent planned them through yet but will do it.
+Yes, enforce three mandatory OS & interaction avoidance laws:
+- **Keyboard Avoidance**: Listen to `WindowInsets.Type.ime()`. When the on-screen keyboard opens, animate bubbles upward to rest cleanly above the keyboard boundary, preventing blocked keystrokes or hidden Send/Backspace buttons.
+- **Landscape / Gaming Auto-Collapse**: Automatically collapse bubbles into an ultra-thin, low-opacity side-pill when rotated to landscape or when running full-screen games/media (YouTube, Netflix) to protect HUDs and subtitles.
+- **Gesture Navigation Safe Margin**: Enforce a strict `16dp` margin between bubbles and the screen border so Android system edge back-swipes never trigger accidental bubble drags or vice-versa.
 
 ---
 
@@ -102,14 +110,29 @@ Sure. Havent planned them through yet but will do it.
 <!-- e.g., Banking alerts, two-factor OTP codes, password reset texts: should they be masked, ignored, or treated normally? -->
 
 **Answer:**
-Treat them as notification treat them but in chat heads.
+Option C (Sensitive / OTP Auto-Masking):
+- Automatically detect sensitive notifications (banking alerts, 2FA SMS codes, password reset OTPs) and mask the message preview (`"••••••"`) in the floating bubble to protect against shoulder-surfing in public.
+- The preview only reveals its text content upon an intentional user tap.
+- Provide a settings toggle allowing users to customize or disable sensitive masking per app.
 
 ### 4.2 Lock screen & offline policy:
 
 <!-- Should bubbles disappear when the phone is locked? Is everything strictly stored locally on the phone with zero cloud/analytics? -->
 
 **Answer:**
-Everything will be strictly local. Stored in mobile. No data leaves the phone.
+Option A (Zero-Network Architecture for initial release, with future analytics re-evaluation):
+- **Zero-Network in v1**: Omit `android.permission.INTERNET` from `AndroidManifest.xml` initially. This provides an absolute on-device guarantee, fast-tracks Google Play policy review, and builds immediate user trust.
+- **Future Analytics Re-evaluation**: Re-evaluate adding opt-in, privacy-preserving crash telemetry (e.g., Firebase Crashlytics) in a future update if diagnostic metrics are needed to resolve complex device-specific bugs.
+- **Lock Screen Privacy**: Bubbles are automatically dismissed/hidden when the device locks.
+
+### 4.3 Background Reliability & OEM Battery Exemption Policy:
+<!-- How will the app prevent background kills by aggressive OEM task managers (Samsung, Xiaomi, OnePlus)? -->
+
+**Answer:**
+Option A: Resilient Foreground Service + Guided OEM Exemption:
+- **Persistent Foreground Service**: Runs a discrete, low-priority ongoing notification in the notification shade to guarantee Android OS does not kill the process.
+- **Guided OEM Setup**: Device brand detection during onboarding with direct deep-links to phone-specific settings (Samsung "Never sleeping apps", Xiaomi "Autostart", etc., conforming to `dontkillmyapp.com` standards).
+- **Auto-Revive on Boot**: Includes `RECEIVE_BOOT_COMPLETED` broadcast receiver to re-initialize the bubble service automatically upon phone reboot.
 
 ---
 
