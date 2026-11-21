@@ -1,7 +1,8 @@
 # Agent Instructions & Project Guidelines
 
-## Git Commit Message Conventions
+## Git Workflow & Commit Rules
 
+- **Explicit User Confirmation Required**: Never commit to git without asking the user for confirmation first. Always present what changes are staged and ask before executing any git commit command.
 - **Forbidden Prefixes**: Never use conventional commit prefixes such as `feat:`, `fix:`, `chore:`, `refactor:`, `style:`, `test:`, or `ci:`.
 - **Format Requirement**: Always start with a capitalized contextual header (e.g., `Initial Commit:`, `UI Update:`, `Feature:`, `Bug Fix:`, `Configuration:`, `Documentation:`), followed by a concise, human-readable, non-technical message.
 - **Tone & Style**: Clear, plain English, accessible to non-technical stakeholders.
