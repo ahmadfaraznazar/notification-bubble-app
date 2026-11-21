@@ -50,14 +50,16 @@ notification-bubble-app/
 ├── .agents/                         # Antigravity agent configuration
 │   └── skills.json                  # Workspace skill registration
 ├── ai-skills/                       # Agent Skills library (21 skills across 6 phases)
-├── documents/                       # Phase 1 & product strategy documentation
-│   ├── PROJECT_PROGRESS_TRACKER.md
+├── documents/                       # Phase-organized product documentation
+│   ├── PROJECT_PROGRESS_TRACKER.md  # Master real-time progress dashboard
 │   ├── PRODUCT_INTAKE_QUESTIONNAIRE.md
-│   ├── IDEA_BRUTAL_AUDIT.md
-│   ├── MARKET_RESEARCH_GAP_ANALYSIS.md
-│   ├── GENRE_TRENDS_RADAR.md
-│   ├── FEASIBILITY_UNIT_ECONOMICS.md
-│   └── MONETIZATION_STRATEGY_OPTIONS.md
+│   ├── 01-ideation-and-validation/  # Phase 1 Strategy Artifacts
+│   │   ├── IDEA_BRUTAL_AUDIT.md
+│   │   ├── MARKET_RESEARCH_GAP_ANALYSIS.md
+│   │   ├── GENRE_TRENDS_RADAR.md
+│   │   ├── FEASIBILITY_UNIT_ECONOMICS.md
+│   │   └── MONETIZATION_STRATEGY_OPTIONS.md
+│   └── 02-planning-and-pm/          # Phase 2 Specifications (PRD, Roadmap, Specs)
 ├── AGENTS.md                        # Agent guidelines & commit conventions
 ├── .gitignore                       # Git ignore rules for Android, Python, and OS junk
 └── README.md                        # Project documentation
