@@ -53,15 +53,15 @@
 ---
 
 ### Phase 3: Architecture & Tech (`ai-skills/03-architecture-and-tech/`)
-- **Current Status**: **Queued**
+- **Current Status**: **In Progress (Step 3.1 Complete)**
 
-| Step | Skill Activated | Focus & Deliverable | Status |
-|:---:|---|---|:---:|
-| **3.1** | `clean-architecture-enforcer` | UDF state boundaries, Service ➔ Domain ➔ UI separation | PENDING |
-| **3.2** | `tech-and-library-selector` | Android Gradle kts setup, Room SQLite, Coil, Compose BOM pinning | PENDING |
-| **3.3** | `android-best-practices` | `NotificationListenerService` isolation, `WindowManager` overlay engine | PENDING |
-| **3.4** | `api-and-data-modeling` | Local Room schema for conversation queues and per-app whitelist toggles | PENDING |
-| **3.5** | `security-and-privacy-audit` | Zero-network manifest enforcement, sensitive notification/OTP redaction | PENDING |
+| Step | Skill Activated | Focus & Deliverable | Status | Artifact / Document |
+|:---:|---|---|:---:|---|
+| **3.1** | `clean-architecture-enforcer` | UDF state boundaries, Service ➔ Domain ➔ UI separation, zero `android.*` in domain | **COMPLETED** | [documents/03-architecture-and-tech/CLEAN_ARCHITECTURE_SPECIFICATION.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/03-architecture-and-tech/CLEAN_ARCHITECTURE_SPECIFICATION.md) |
+| **3.2** | `tech-and-library-selector` | Android Gradle kts setup, Room SQLite, Coil, Compose BOM pinning | **CURRENT** | PENDING |
+| **3.3** | `android-best-practices` | `NotificationListenerService` isolation, `WindowManager` overlay engine | PENDING | &mdash; |
+| **3.4** | `api-and-data-modeling` | Local Room schema for conversation queues and per-app whitelist toggles | PENDING | &mdash; |
+| **3.5** | `security-and-privacy-audit` | Zero-network manifest enforcement, sensitive notification/OTP redaction | PENDING | &mdash; |
 
 ---
 

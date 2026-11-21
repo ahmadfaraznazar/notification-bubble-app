@@ -59,7 +59,12 @@ notification-bubble-app/
 │   │   ├── GENRE_TRENDS_RADAR.md
 │   │   ├── FEASIBILITY_UNIT_ECONOMICS.md
 │   │   └── MONETIZATION_STRATEGY_OPTIONS.md
-│   └── 02-planning-and-pm/          # Phase 2 Specifications (PRD, Roadmap, Specs)
+│   ├── 02-planning-and-pm/          # Phase 2 Specifications (PRD, Roadmap, Specs)
+│   │   ├── PRODUCT_REQUIREMENTS_DOCUMENT.md
+│   │   ├── ROADMAP_AND_MILESTONES.md
+│   │   └── SPEC_DRIVEN_TASK_CARDS.md
+│   └── 03-architecture-and-tech/    # Phase 3 Architecture & Technical Contracts
+│       └── CLEAN_ARCHITECTURE_SPECIFICATION.md
 ├── AGENTS.md                        # Agent guidelines & commit conventions
 ├── .gitignore                       # Git ignore rules for Android, Python, and OS junk
 └── README.md                        # Project documentation
