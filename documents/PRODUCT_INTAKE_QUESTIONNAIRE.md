@@ -160,6 +160,19 @@ Deep customization with tiered access:
 - **Free Tier**: Default bubble size, standard badge indicators, drag snapping behavior.
 - **Pro Tier**: Continuous slider for bubble size (Small / Medium / Large), custom badge colors, border thickness, transparency/opacity levels, and per-app snooze schedules.
 
+### 5.3 Brand Identity & Mascot Strategy:
+<!-- What character/mascot concept will represent the app, and how will it be deployed? -->
+
+**Answer:**
+- **Top Contenders**:
+  - **"Bubby"**: A translucent, spring-physics jelly orb that embodies fluid motion and playful micro-delight.
+  - **"Pebble"**: A friendly, sleek mini-bot with expressive LED eyes that conveys smart filtering and digital security.
+- **Deployment & Functional Roles**:
+  - **App Icon & Store Branding**: High-contrast, distinctive character icon to stand out against generic gear/speech-bubble competitors on Google Play.
+  - **Onboarding Guide**: Disarms user anxiety during sensitive permission requests (Notification Listener & Overlay) with reassuring, human-friendly guidance.
+  - **Empty States & Micro-Delight**: Asleep when no unread notifications are pending; animated dismiss interaction in the bottom target zone.
+  - **Strict Constraint**: Never replaces the actual sender avatar on active floating bubbles; never disrupts the screen during active media/gaming.
+
 ---
 
 ## 6. Competitive Differentiation & Gold Standards
@@ -219,3 +232,21 @@ Basic notification bubble appearance and interaction.
 
 **Answer:**
 i dont know yet.
+
+### 8.3 Technology Stack & Framework Selection:
+<!-- What tech stack will be used, and how does it map to developer skills? -->
+
+**Answer:**
+- **Pure Native Kotlin + Jetpack Compose**:
+  - Delivers silky-smooth 120Hz GPU-accelerated spring animations at ~15MB RAM footprint (avoiding the 80MB-120MB overhead and battery kills of React Native in background overlay services).
+  - Developer Collaboration Model: Uses the reactive, declarative mental model of React/React Native (functional components, states, effects, props) to design and review all Compose components.
+
+### 8.4 Binary Size & Performance Constraints:
+<!-- What is the target APK/AAB download size and optimization strategy? -->
+
+**Answer:**
+- **Target Size**: Ultra-lean download size under **5MB–6MB** (compared to 25MB–35MB competitor bloat).
+- **Zero-Network Ingestion**: Zero network libraries (`OkHttp`, `Retrofit`) in v1, saving 4MB–6MB.
+- **R8 Full Optimization**: `isMinifyEnabled = true` and `isShrinkResources = true` in release builds to strip unreferenced classes and assets.
+- **Vector Assets Only**: XML Vector Drawables for all UI icons/shapes (~1KB each) instead of multi-density PNGs.
+- **Strict Zero-Bloat Dependency Diet**: No third-party ad networks, no heavy analytics SDKs, and targeted icon imports only.
