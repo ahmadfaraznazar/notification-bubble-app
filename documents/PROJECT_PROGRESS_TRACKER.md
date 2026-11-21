@@ -42,13 +42,13 @@
 ---
 
 ### Phase 2: Planning & Product Management (`ai-skills/02-planning-and-pm/`)
-- **Current Status**: **In Progress (Step 2.1 Complete)**
+- **Current Status**: **In Progress (Step 2.2 Complete)**
 
 | Step | Skill Activated | Focus & Deliverable | Status | Artifact / Document |
 |:---:|---|---|:---:|---|
 | **2.1** | `prd-and-scope-cutter` | Strict MVP boundary, ruthless non-goal pruning, 20 core user stories | **COMPLETED** | [documents/02-planning-and-pm/PRODUCT_REQUIREMENTS_DOCUMENT.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/PRODUCT_REQUIREMENTS_DOCUMENT.md) |
-| **2.2** | `roadmap-and-milestones` | Phased milestone schedule (v0.1 Prototype ➔ v1.0 Launch) | **CURRENT** | PENDING |
-| **2.3** | `spec-driven-tasks` | Atomic, testable developer task cards designed for rapid agent execution | PENDING | &mdash; |
+| **2.2** | `roadmap-and-milestones` | Phased milestone schedule (Milestones 0–4), dependencies, risk register | **COMPLETED** | [documents/02-planning-and-pm/ROADMAP_AND_MILESTONES.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/ROADMAP_AND_MILESTONES.md) |
+| **2.3** | `spec-driven-tasks` | Atomic, testable developer task cards designed for rapid agent execution | **CURRENT** | PENDING |
 
 ---
 
