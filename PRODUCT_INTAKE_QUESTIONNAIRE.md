@@ -147,14 +147,18 @@ Option A: Resilient Foreground Service + Guided OEM Exemption:
 -->
 
 **Answer:**
-I'll add multiple designs. One or two free and other in premium.
+Modern, polished aesthetic with free and premium theme packs:
+- **Free Core Themes**: Clean Material 3 (Dynamic Color / Material You palette) and standard Dark/Light mode matching.
+- **Premium Themes (Pro Unlock)**: Frosted Glass / Glassmorphism, OLED Pitch Black, Cyberpunk Neon, and app-accented glow borders.
 
 ### 5.2 What level of customization should the user have?
 
 <!-- e.g., Bubble size, badge colors, border thickness, opacity/transparency, custom notification sounds or haptics? -->
 
 **Answer:**
-Every level of customization. I want to make it as cusotmizable as i can.
+Deep customization with tiered access:
+- **Free Tier**: Default bubble size, standard badge indicators, drag snapping behavior.
+- **Pro Tier**: Continuous slider for bubble size (Small / Medium / Large), custom badge colors, border thickness, transparency/opacity levels, and per-app snooze schedules.
 
 ---
 
@@ -187,7 +191,16 @@ Old school nostalgia. Customization. Modern UI. Privacy. And yet to be planned n
 -->
 
 **Answer:**
-not open source though. cause i do appreciate money if i can make any. i'd like to see which monetization model works best.
+Option A: Hybrid Freemium with One-Time Lifetime In-App Purchase ($3.99 – $4.99):
+- **Free Tier (Fully functional core utility)**:
+  - Up to 2–3 active simultaneous apps.
+  - Core bubble drag physics, screen-edge snapping, and basic notification previews.
+  - Clean Material 3 / Light & Dark system themes.
+- **Pro Tier ($3.99 – $4.99 single lifetime unlock, zero subscriptions)**:
+  - Unlimited simultaneous app bubbles.
+  - Complete premium visual theme pack (OLED Pitch Black, Cyberpunk Neon, Frosted Glass).
+  - Deep customization (custom sizing, per-app snooze rules, custom quick-reply templates).
+  - One-time payment builds long-term goodwill and maximizes conversion among Android power users.
 
 ---
 
