@@ -1,7 +1,7 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-23 (End of Phase 5 Session - Phase 5 Complete)
+> **Last Updated**: 2026-11-23 (Step 6.1 Completed)
 
 ---
 
@@ -9,11 +9,11 @@
 
 > [!IMPORTANT]
 > **Instructions for Future Sessions / New Agent Chats**:
-> If the user says *"read all docs and continue"*, *"continue to phase 6"*, or similar:
-> 1. **Current Standing**: Phase 1, Phase 2, Phase 3, Phase 4, and Phase 5 are **100% Complete**.
-> 2. **Immediate Action on Resume**: Kick off **Phase 6 (Engineering Ops)** starting with **Step 6.1: Repo Map & Code Conventions**.
-> 3. **Skill to Activate**: [ai-skills/01-app-development/06-engineering-ops/repo-map-and-conventions/SKILL.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/ai-skills/01-app-development/06-engineering-ops/repo-map-and-conventions/SKILL.md).
-> 4. **Deliverable Target**: Write `documents/06-engineering-ops/REPO_MAP_AND_CONVENTIONS.md` establishing directory layouts, naming standards, structured logging, branch strategies, and CI quality gates.
+> If the user says *"read all docs and continue"*, *"continue to 6.2"*, or similar:
+> 1. **Current Standing**: Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, and **Step 6.1** of Phase 6 are **100% Complete**.
+> 2. **Immediate Action on Resume**: Proceed with **Phase 6 (Engineering Ops)** at **Step 6.2: Code Review Adversary**.
+> 3. **Skill to Activate**: [ai-skills/01-app-development/06-engineering-ops/code-review-adversary/SKILL.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/ai-skills/01-app-development/06-engineering-ops/code-review-adversary/SKILL.md).
+> 4. **Deliverable Target**: Write `documents/06-engineering-ops/CODE_REVIEW_ADVERSARY.md` establishing adversarial PR review checklists, memory leak detection heuristics, frame-drop hunting, and race condition stress testing.
 
 ---
 
@@ -35,7 +35,7 @@
 [ Phase 5: Growth & Monetization ] ──► (100% Complete)
          │
          ▼
-[ Phase 6: Engineering Ops ] ──► (READY TO START)
+[ Phase 6: Engineering Ops ] ──► (IN PROGRESS: Step 6.1 Done)
 ```
 
 ---
@@ -101,13 +101,13 @@
 ---
 
 ### Phase 6: Engineering Ops (`ai-skills/06-engineering-ops/`)
-- **Current Status**: **Queued**
+- **Current Status**: **In Progress (33% Complete)**
 
-| Step | Skill Activated | Focus & Deliverable | Status |
-|:---:|---|---|:---:|
-| **6.1** | `repo-map-and-conventions` | Git branch conventions, structured logging, CI verification scripts | PENDING |
-| **6.2** | `code-review-adversary` | Adversarial multi-axis PR audits, memory leak and frame-drop checks | PENDING |
-| **6.3** | `release-and-qa-checklist` | Google Play pre-flight verification, OEM background survival gate check | PENDING |
+| Step | Skill Activated | Focus & Deliverable | Status | Artifact / Document |
+|:---:|---|---|:---:|---|
+| **6.1** | `repo-map-and-conventions` | Git branch conventions, structured logging, CI verification scripts | **COMPLETED** | [documents/06-engineering-ops/REPO_MAP_AND_CONVENTIONS.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/06-engineering-ops/REPO_MAP_AND_CONVENTIONS.md) |
+| **6.2** | `code-review-adversary` | Adversarial multi-axis PR audits, memory leak and frame-drop checks | PENDING | - |
+| **6.3** | `release-and-qa-checklist` | Google Play pre-flight verification, OEM background survival gate check | PENDING | - |
 
 ---
 
