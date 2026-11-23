@@ -1,7 +1,7 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-23 (Step 6.1 Completed)
+> **Last Updated**: 2026-11-23 (Step 6.2 Completed)
 
 ---
 
@@ -9,11 +9,11 @@
 
 > [!IMPORTANT]
 > **Instructions for Future Sessions / New Agent Chats**:
-> If the user says *"read all docs and continue"*, *"continue to 6.2"*, or similar:
-> 1. **Current Standing**: Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, and **Step 6.1** of Phase 6 are **100% Complete**.
-> 2. **Immediate Action on Resume**: Proceed with **Phase 6 (Engineering Ops)** at **Step 6.2: Code Review Adversary**.
-> 3. **Skill to Activate**: [ai-skills/01-app-development/06-engineering-ops/code-review-adversary/SKILL.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/ai-skills/01-app-development/06-engineering-ops/code-review-adversary/SKILL.md).
-> 4. **Deliverable Target**: Write `documents/06-engineering-ops/CODE_REVIEW_ADVERSARY.md` establishing adversarial PR review checklists, memory leak detection heuristics, frame-drop hunting, and race condition stress testing.
+> If the user says *"read all docs and continue"*, *"continue to 6.3"*, or similar:
+> 1. **Current Standing**: Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, and **Steps 6.1 & 6.2** of Phase 6 are **100% Complete**.
+> 2. **Immediate Action on Resume**: Proceed with **Phase 6 (Engineering Ops)** at **Step 6.3: Release Pre-Flight & QA Checklist**.
+> 3. **Skill to Activate**: [ai-skills/01-app-development/06-engineering-ops/release-and-qa-checklist/SKILL.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/ai-skills/01-app-development/06-engineering-ops/release-and-qa-checklist/SKILL.md).
+> 4. **Deliverable Target**: Write `documents/06-engineering-ops/RELEASE_AND_QA_CHECKLIST.md` establishing release pre-flight gates, OEM background survival validation (Samsung, Xiaomi, Pixel), zero-downtime hotfix procedures, and rollback runbooks.
 
 ---
 
@@ -35,7 +35,7 @@
 [ Phase 5: Growth & Monetization ] ──► (100% Complete)
          │
          ▼
-[ Phase 6: Engineering Ops ] ──► (IN PROGRESS: Step 6.1 Done)
+[ Phase 6: Engineering Ops ] ──► (IN PROGRESS: Steps 6.1 & 6.2 Done)
 ```
 
 ---
@@ -101,12 +101,12 @@
 ---
 
 ### Phase 6: Engineering Ops (`ai-skills/06-engineering-ops/`)
-- **Current Status**: **In Progress (33% Complete)**
+- **Current Status**: **In Progress (66% Complete)**
 
 | Step | Skill Activated | Focus & Deliverable | Status | Artifact / Document |
 |:---:|---|---|:---:|---|
 | **6.1** | `repo-map-and-conventions` | Git branch conventions, structured logging, CI verification scripts | **COMPLETED** | [documents/06-engineering-ops/REPO_MAP_AND_CONVENTIONS.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/06-engineering-ops/REPO_MAP_AND_CONVENTIONS.md) |
-| **6.2** | `code-review-adversary` | Adversarial multi-axis PR audits, memory leak and frame-drop checks | PENDING | - |
+| **6.2** | `code-review-adversary` | Adversarial multi-axis PR audits, memory leak and frame-drop checks | **COMPLETED** | [documents/06-engineering-ops/CODE_REVIEW_ADVERSARY.md](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/06-engineering-ops/CODE_REVIEW_ADVERSARY.md) |
 | **6.3** | `release-and-qa-checklist` | Google Play pre-flight verification, OEM background survival gate check | PENDING | - |
 
 ---
