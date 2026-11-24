@@ -1,20 +1,21 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 2 Underway - Task 09 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 2 Underway - Tasks 09 & 10 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 2 (Notification Listener & Filtering)** is in active development.
+> **Current Standing**: **Sprint 2 (Notification Listener & Filtering)** is at the halfway milestone.
 > - **Sprint 0 Sealed**: Tasks 01–04 complete.
 > - **Sprint 1 Sealed**: Tasks 05–08 complete.
-> - **Task 09 Completed**: `NotificationListenerService` Ingestion Pipeline (`BubbleNotificationListenerService`, `NotificationMessage`, `NotificationRepositoryImpl` with 10-item backpressure).
-> - **Immediate Next Step**: Begin **Task 10: Package Whitelisting & Quiet Hours Filter (Room Database Integration)**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-10-package-whitelisting--quiet-hours-filter-room-database-integration](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement Room SQLite entities (`AppRuleEntity`), DAO (`AppRuleDao`), and `AppDatabase.kt` for sub-millisecond indexed whitelist lookups and scheduled quiet hours.
+> - **Task 09 Completed**: `NotificationListenerService` Ingestion Pipeline (`BubbleNotificationListenerService`).
+> - **Task 10 Completed**: Local Room SQLite Database for App Whitelist & Settings (`AppDatabase`, `AppRuleEntity`, `AppRuleDao`, `RuleRepositoryImpl`, pre-seeded defaults, quiet hours math).
+> - **Immediate Next Step**: Begin **Task 11: Sensitive 2FA / OTP Auto-Masking Filter**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-11-sensitive-2fa--otp-auto-masking-filter](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `SensitiveContentFilter.kt` with pre-compiled regex signatures for 2FA/OTP codes and financial transactions, automatic `"•••••• (Tap to view)"` masking, and blacklisted authenticator package dropping.
 
 ---
 

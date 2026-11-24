@@ -216,7 +216,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Discards ongoing notifications (media players, foreground downloads).
 - **Verification**: Send test SMS/notification via ADB; verify listener logs structured data.
 
-#### [ ] Task 10: Local Room SQLite Database for App Whitelist & Settings
+#### [x] Task 10: Local Room SQLite Database for App Whitelist & Settings
 - **User Story Reference**: Story 4
 - **Files Touched**: `data/local/AppDatabase.kt`, `data/local/entity/AppRuleEntity.kt`, `data/local/dao/AppRuleDao.kt`
 - **Acceptance Criteria**:
