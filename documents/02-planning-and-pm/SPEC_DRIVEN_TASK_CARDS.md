@@ -145,7 +145,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Touches outside the bubble pass straight through to underlying apps.
 - **Verification**: Launch service; verify background apps receive clicks normally.
 
-#### [ ] Task 03: Resilient Foreground Service & Boot Revival
+#### [x] Task 03: Resilient Foreground Service & Boot Revival
 - **User Story Reference**: Story 3
 - **Files Touched**: `service/OverlayService.kt`, `service/BootReceiver.kt`, `AndroidManifest.xml`
 - **Acceptance Criteria**:

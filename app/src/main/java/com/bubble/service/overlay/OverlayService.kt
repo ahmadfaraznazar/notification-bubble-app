@@ -3,6 +3,7 @@ package com.bubble.service.overlay
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -21,12 +22,13 @@ import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.bubble.R
 import com.bubble.core.logging.BubbleLog
+import com.bubble.ui.MainActivity
 import com.bubble.ui.overlay.BubbleOverlayContent
 import com.bubble.ui.overlay.OverlayHostLayout
 
 /**
- * Foreground service hosting the full-screen transparent WindowManager overlay.
- * Coordinates Compose view tree lifecycles and transparent touch dispatching.
+ * Resilient foreground service hosting the full-screen transparent WindowManager overlay.
+ * Configured with START_STICKY, low-priority ongoing notification, and lifecycle resilience.
  */
 class OverlayService : Service() {
 
@@ -37,7 +39,7 @@ class OverlayService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        BubbleLog.i("OverlayService", "Initializing OverlayService and WindowManager host")
+        BubbleLog.i(TAG, "Initializing OverlayService and WindowManager host")
 
         lifecycleOwner.onCreate()
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -47,7 +49,23 @@ class OverlayService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        lifecycleOwner.onStart()
+        val action = intent?.action ?: ACTION_START
+        BubbleLog.i(TAG, "onStartCommand received action: $action")
+
+        when (action) {
+            ACTION_STOP -> {
+                stopSelf()
+                return START_NOT_STICKY
+            }
+            ACTION_START -> {
+                lifecycleOwner.onStart()
+                if (!isOverlayAttached) {
+                    attachOverlayWindow()
+                }
+            }
+        }
+
+        // START_STICKY instructs OS to recreate service if terminated under low memory
         return START_STICKY
     }
 
@@ -59,9 +77,8 @@ class OverlayService : Service() {
     private fun attachOverlayWindow() {
         if (isOverlayAttached) return
 
-        // Verify system overlay permission
         if (!Settings.canDrawOverlays(this)) {
-            BubbleLog.w("OverlayService", "Cannot attach overlay: SYSTEM_ALERT_WINDOW permission missing")
+            BubbleLog.w(TAG, "Cannot attach overlay: SYSTEM_ALERT_WINDOW permission missing")
             return
         }
 
@@ -88,7 +105,6 @@ class OverlayService : Service() {
         }
 
         val host = OverlayHostLayout(this).apply {
-            // Bridge Jetpack Compose ViewTree lifecycle contracts
             setViewTreeLifecycleOwner(this@OverlayService.lifecycleOwner)
             setViewTreeViewModelStoreOwner(this@OverlayService.lifecycleOwner)
             setViewTreeSavedStateRegistryOwner(this@OverlayService.lifecycleOwner)
@@ -111,36 +127,57 @@ class OverlayService : Service() {
         try {
             windowManager?.addView(host, params)
             isOverlayAttached = true
-            BubbleLog.i("OverlayService", "WindowManager overlay view attached successfully")
+            BubbleLog.i(TAG, "WindowManager overlay view attached successfully")
         } catch (e: Exception) {
-            BubbleLog.e("OverlayService", "Failed to attach WindowManager overlay view", e)
+            BubbleLog.e(TAG, "Failed to attach WindowManager overlay view", e)
         }
     }
 
     /**
-     * Creates and attaches a discreet ongoing foreground notification.
+     * Creates and attaches a discreet ongoing foreground notification with pending intent.
      */
     private fun startForegroundNotification() {
-        val channelId = "bubble_overlay_service_channel"
+        val channelId = CHANNEL_ID
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
                 getString(R.string.notification_channel_name),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_MIN
             ).apply {
                 description = getString(R.string.notification_channel_desc)
                 setShowBadge(false)
+                enableLights(false)
+                enableVibration(false)
             }
             notificationManager.createNotificationChannel(channel)
         }
+
+        val openAppIntent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+
+        val contentPendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            openAppIntent,
+            pendingIntentFlags
+        )
 
         val notification: Notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.notification_channel_desc))
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setContentIntent(contentPendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_MIN)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setOngoing(true)
             .build()
 
@@ -155,16 +192,21 @@ class OverlayService : Service() {
         }
     }
 
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        BubbleLog.i(TAG, "onTaskRemoved: Ensuring overlay service remains alive")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        BubbleLog.i("OverlayService", "Tearing down OverlayService and removing WindowManager view")
+        BubbleLog.i(TAG, "Tearing down OverlayService and removing WindowManager view")
 
         overlayHostLayout?.let { host ->
             if (isOverlayAttached) {
                 try {
                     windowManager?.removeView(host)
                 } catch (e: Exception) {
-                    BubbleLog.e("OverlayService", "Exception removing overlay view from WindowManager", e)
+                    BubbleLog.e(TAG, "Exception removing overlay view from WindowManager", e)
                 }
                 isOverlayAttached = false
             }
@@ -175,6 +217,11 @@ class OverlayService : Service() {
     }
 
     companion object {
+        private const val TAG = "OverlayService"
+        private const val CHANNEL_ID = "bubble_overlay_service_channel"
         private const val NOTIFICATION_ID = 1001
+
+        const val ACTION_START = "com.bubble.action.START_OVERLAY"
+        const val ACTION_STOP = "com.bubble.action.STOP_OVERLAY"
     }
 }
