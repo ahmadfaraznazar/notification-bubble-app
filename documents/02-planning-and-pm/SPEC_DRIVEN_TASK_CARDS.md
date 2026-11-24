@@ -154,7 +154,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - `BootReceiver` listens to `RECEIVE_BOOT_COMPLETED` and re-attaches service on phone restart.
 - **Verification**: Force-kill service via `adb shell am kill`; verify it restarts automatically.
 
-#### [ ] Task 04: Spring Physics Touch Controller & Screen-Edge Snapping
+#### [x] Task 04: Spring Physics Touch Controller & Screen-Edge Snapping
 - **User Story Reference**: Story 6, 7, 8
 - **Files Touched**: `ui/interaction/BubblePhysicsController.kt`, `ui/interaction/SpringMotion.kt`
 - **Acceptance Criteria**:
