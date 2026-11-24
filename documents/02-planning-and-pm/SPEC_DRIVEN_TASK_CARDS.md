@@ -265,7 +265,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Resets coordinates when keyboard closes.
 - **Verification**: Open Gboard in underlying app; verify bubble slides up without blocking keys.
 
-#### [ ] Task 15: Landscape & Full-Screen Auto-Dock to Side-Pill
+#### [x] Task 15: Landscape & Full-Screen Auto-Dock to Side-Pill
 - **User Story Reference**: Story 15
 - **Files Touched**: `ui/interaction/OrientationObserver.kt`, `ui/atoms/DockedSidePill.kt`
 - **Acceptance Criteria**:

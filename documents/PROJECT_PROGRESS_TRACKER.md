@@ -1,22 +1,23 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 3 Underway - Tasks 13 & 14 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 3 Underway - Tasks 13, 14 & 15 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is at the halfway milestone.
+> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is 75% complete.
 > - **Sprint 0 Sealed**: Tasks 01–04 complete.
 > - **Sprint 1 Sealed**: Tasks 05–08 complete.
 > - **Sprint 2 Sealed**: Tasks 09–12 complete.
 > - **Task 13 Completed**: Expanded Flyout Notification Preview Card (`NotificationPreviewCard.kt`, `PreviewCardViewModel.kt`).
-> - **Task 14 Completed**: Keyboard Inset Sensor (`KeyboardInsetObserver.kt`, `avoidKeyboard` modifier, WindowManager resize mode).
-> - **Immediate Next Step**: Begin **Task 15: Landscape & Full-Screen Auto-Dock to Side-Pill**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-15-landscape--full-screen-auto-dock-to-side-pill](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `OrientationObserver.kt` and `DockedSidePill.kt` detecting landscape orientation or full-screen gaming and collapsing bubbles into a subtle 40% translucent 12dp edge tab.
+> - **Task 14 Completed**: Keyboard Inset Sensor (`KeyboardInsetObserver.kt`, `avoidKeyboard` modifier).
+> - **Task 15 Completed**: Landscape & Full-Screen Auto-Dock to Side-Pill (`OrientationObserver.kt`, `DockedSidePill.kt`, 12dp x 36dp translucent border tab).
+> - **Immediate Next Step**: Begin **Task 16: Inline Quick Reply Intent & RemoteInput Dispatch**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-16-inline-quick-reply-intent--remoteinput-dispatch](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `QuickReplyInput.kt` and `NotificationActionDispatcher.kt` to extract `Notification.Action` with `RemoteInput`, bind direct text response, and dispatch via `RemoteInput.sendResult()`.
 
 ---
 
