@@ -207,7 +207,7 @@ Every task card is atomic, completable in a single focused session, and touches 
 
 ### Sprint 2: Notification Listener & Filtering (Tasks 09–12)
 
-#### [ ] Task 09: `NotificationListenerService` Ingestion Pipeline
+#### [x] Task 09: `NotificationListenerService` Ingestion Pipeline
 - **User Story Reference**: Story 5
 - **Files Touched**: `service/NotificationListener.kt`, `domain/repository/NotificationRepository.kt`
 - **Acceptance Criteria**:
