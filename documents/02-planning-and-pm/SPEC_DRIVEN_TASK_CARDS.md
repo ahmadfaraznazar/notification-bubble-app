@@ -136,7 +136,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Zero internet permissions in manifest.
 - **Verification**: Run `./gradlew assembleDebug` &mdash; compiles cleanly with zero warnings.
 
-#### [ ] Task 02: Full-Screen Transparent WindowManager Compose Host
+#### [x] Task 02: Full-Screen Transparent WindowManager Compose Host
 - **User Story Reference**: Story 5
 - **Files Touched**: `service/OverlayService.kt`, `ui/OverlayHostView.kt`
 - **Acceptance Criteria**:

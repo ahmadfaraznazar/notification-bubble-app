@@ -1,7 +1,7 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 0 Underway - Task 01 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 0 Underway - Tasks 01 & 02 Complete)
 
 ---
 
@@ -9,10 +9,11 @@
 
 > [!IMPORTANT]
 > **Current Standing**: Sprint 0 (Foundation & Overlay Engine) is in active development.
-> - **Task 01 Completed**: Android Project Scaffolding & Lean Gradle Config (BOM 2024.06.00, Kotlin 2.0+, KSP, R8, Zero-Network manifest).
-> - **Immediate Next Step**: Begin **Task 02: Full-Screen Transparent WindowManager Compose Host**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-02-full-screen-transparent-windowmanager-compose-host](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Create `OverlayService.kt` and `OverlayHostView.kt` with `SYSTEM_ALERT_WINDOW`, `FLAG_NOT_TOUCH_MODAL`, and `FLAG_NOT_FOCUSABLE` touch pass-through.
+> - **Task 01 Completed**: Android Project Scaffolding & Lean Gradle Config.
+> - **Task 02 Completed**: Full-Screen Transparent WindowManager Compose Host (`OverlayService`, `OverlayLifecycleOwner`, `OverlayHostLayout`, and `BubbleOverlayContent`).
+> - **Immediate Next Step**: Begin **Task 03: Resilient Foreground Service & Boot Revival**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-03-resilient-foreground-service--boot-revival](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `BootReceiver.kt`, configure crash revival logic (`START_STICKY`), and wire low-priority foreground ongoing persistence.
 
 ---
 
