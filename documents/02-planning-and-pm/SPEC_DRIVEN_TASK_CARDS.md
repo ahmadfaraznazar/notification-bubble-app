@@ -296,7 +296,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Prominent "100% On-Device / Zero-Network Guaranteed" privacy badge.
 - **Verification**: Walk through onboarding on a fresh install; verify all permissions are granted.
 
-#### [ ] Task 18: OEM Battery Exemption Deep-Link Wizard (`dontkillmyapp`)
+#### [x] Task 18: OEM Battery Exemption Deep-Link Wizard (`dontkillmyapp`)
 - **User Story Reference**: Story 3
 - **Files Touched**: `service/OEMExemptionHelper.kt`, `ui/onboarding/OEMSetupDialog.kt`
 - **Acceptance Criteria**:

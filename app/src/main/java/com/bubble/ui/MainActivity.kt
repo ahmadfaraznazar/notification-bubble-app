@@ -39,10 +39,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import com.bubble.service.oem.OEMExemptionHelper
 import com.bubble.service.overlay.OverlayService
 import com.bubble.ui.onboarding.AppPickerScreen
 import com.bubble.ui.onboarding.AppPickerViewModel
 import com.bubble.ui.onboarding.MascotWizardScreen
+import com.bubble.ui.onboarding.OEMSetupDialog
 import com.bubble.ui.onboarding.checkNotificationListenerAccess
 import com.bubble.ui.onboarding.checkOverlayPermission
 
@@ -102,7 +104,14 @@ fun BubbleAppDashboard(
 ) {
     val context = LocalContext.current
     val hasOverlayPermission by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
+    val isBatteryOptimized by remember { mutableStateOf(OEMExemptionHelper.isBatteryOptimizationIgnored(context)) }
+    val brand = remember { OEMExemptionHelper.detectBrand() }
+    var showOemDialog by remember { mutableStateOf(false) }
     val pickerUiState by appPickerViewModel.uiState.collectAsState()
+
+    if (showOemDialog) {
+        OEMSetupDialog(onDismiss = { showOemDialog = false })
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -204,6 +213,45 @@ fun BubbleAppDashboard(
                         ) {
                             Text("Grant Permission")
                         }
+                    }
+                }
+            }
+
+            // OEM Battery Survival Card
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Battery Optimization",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White,
+                            fontSize = 16.sp
+                        )
+                        StatusPill(isGranted = isBatteryOptimized)
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Prevent ${brand.displayName} task killers from stopping chat heads when the screen locks.",
+                        color = Color(0xFF94A3B8),
+                        fontSize = 13.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button(
+                        onClick = { showOemDialog = true },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0284C7)),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Battery Survival Guide")
                     }
                 }
             }
