@@ -247,7 +247,7 @@ Every task card is atomic, completable in a single focused session, and touches 
 
 ### Sprint 3: Flyout Card, Keyboard & Insets (Tasks 13–16)
 
-#### [ ] Task 13: Molecule `ExpandedFlyoutCard` with Action Pills
+#### [x] Task 13: Molecule `ExpandedFlyoutCard` with Action Pills
 - **User Story Reference**: Story 10, 13
 - **Files Touched**: `ui/molecules/ExpandedFlyoutCard.kt`, `ui/atoms/ActionPill.kt`
 - **Acceptance Criteria**:

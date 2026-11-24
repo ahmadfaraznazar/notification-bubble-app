@@ -1,24 +1,21 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 2 100% Complete - Ready for Sprint 3)
+> **Last Updated**: 2026-11-24 (Sprint 3 Underway - Task 13 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 2 (Notification Listener & Filtering) is 100% Complete & Sealed!**
+> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is in active development.
 > - **Sprint 0 Sealed**: Tasks 01–04 complete (Scaffolding, WindowManager overlay, Boot revival, 120Hz physics).
 > - **Sprint 1 Sealed**: Tasks 05–08 complete (Atoms, Molecule, Dismiss Black Hole, Staggered BubbleStack).
-> - **Sprint 2 Sealed**: Tasks 09–12 complete:
->   - Task 09: `NotificationListenerService` Ingestion Pipeline (`BubbleNotificationListenerService`).
->   - Task 10: Local Room SQLite Database for App Whitelist & Settings (`AppDatabase`, `AppRuleEntity`, `AppRuleDao`, `RuleRepositoryImpl`).
->   - Task 11: Sensitive 2FA / OTP Auto-Masking Filter (`SensitiveContentFilter.kt`).
->   - Task 12: Onboarding App Picker (`AppPickerList.kt`, `AppPickerViewModel.kt`, 0-default selection, 1-tap `[Chats Only]` preset).
-> - **Immediate Next Step**: Begin **Sprint 3: Floating Overlay Experience & Quick Reply** starting with **Task 13: Expanded Notification Preview Card**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#sprint-3-floating-overlay-experience--quick-reply-tasks-1316](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `NotificationPreviewCard.kt` rendering a 300dp compact card anchored adjacent to the resting bubble, showing sender title, message snippet, and quick action buttons.
+> - **Sprint 2 Sealed**: Tasks 09–12 complete (Listener pipeline, Room SQLite, OTP auto-masking, App Picker).
+> - **Task 13 Completed**: Expanded Flyout Notification Preview Card (`NotificationPreviewCard.kt`, `PreviewCardViewModel.kt`, tap-to-unmask, action pills row).
+> - **Immediate Next Step**: Begin **Task 14: Keyboard Inset Sensor (`WindowInsets.Type.ime()`)**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-14-keyboard-inset-sensor-windowinsetstypeime](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `KeyboardInsetObserver.kt` / `avoidKeyboard` modifier listening to `WindowInsets.Type.ime()` and smoothly translating floating bubbles and flyout cards above on-screen software keyboards.
 
 ---
 

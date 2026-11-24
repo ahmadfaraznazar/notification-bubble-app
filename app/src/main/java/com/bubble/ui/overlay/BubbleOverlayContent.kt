@@ -24,18 +24,22 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import com.bubble.domain.model.ActiveBubble
 import com.bubble.domain.model.BubbleStackState
+import com.bubble.domain.model.NotificationMessage
 import com.bubble.ui.interaction.BubblePhysicsController
 import com.bubble.ui.organisms.ActiveBubbleStack
 import com.bubble.ui.organisms.DismissTargetZone
+import com.bubble.ui.organisms.NotificationPreviewCard
+import com.bubble.ui.theme.BubbleDimensions
 import com.bubble.ui.theme.BubbleTheme
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
- * Compose Overlay hierarchy with spring physics, 120Hz gesture tracking,
- * multi-conversation stack management, and magnetic dismiss black hole.
+ * Compose Overlay hierarchy managing spring physics, multi-conversation stacks,
+ * magnetic dismiss target, and the floating expandable notification preview card.
  */
 @Composable
 fun BubbleOverlayContent(
@@ -46,7 +50,7 @@ fun BubbleOverlayContent(
     val haptic = LocalHapticFeedback.current
     val coroutineScope = rememberCoroutineScope()
 
-    // Active multi-conversation stack state
+    // Multi-conversation stack state
     var stackState by remember {
         mutableStateOf(
             BubbleStackState(
@@ -81,6 +85,8 @@ fun BubbleOverlayContent(
     }
 
     var isDragging by remember { mutableStateOf(false) }
+    var isPreviewExpanded by remember { mutableStateOf(false) }
+    var isUnmasked by remember { mutableStateOf(false) }
 
     BubbleTheme {
         BoxWithConstraints(
@@ -88,6 +94,8 @@ fun BubbleOverlayContent(
         ) {
             val screenWidthPx = with(density) { maxWidth.toPx() }
             val screenHeightPx = with(density) { maxHeight.toPx() }
+            val cardWidthPx = with(density) { BubbleDimensions.PreviewCardMaxWidth.toPx() }
+            val spacingPx = with(density) { 12.dp.toPx() }
 
             val physicsController = remember(screenWidthPx, screenHeightPx) {
                 BubblePhysicsController(
@@ -104,7 +112,7 @@ fun BubbleOverlayContent(
 
             val isMagneticActive = isDragging && physicsController.checkMagneticZone(physicsController.offset.value)
 
-            // Tactile tick when bubble gets caught in magnetic pull
+            // Tactile tick on magnetic pull lock
             LaunchedEffect(isMagneticActive) {
                 if (isMagneticActive) {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -117,6 +125,75 @@ fun BubbleOverlayContent(
                 isMagneticActive = isMagneticActive,
                 modifier = Modifier.align(Alignment.BottomCenter)
             )
+
+            // Active Leader Bubble & Message
+            val activeBubble = stackState.activeBubble
+            val activeMessage = remember(activeBubble) {
+                activeBubble?.let {
+                    NotificationMessage(
+                        id = it.conversationId,
+                        senderName = it.senderName,
+                        textSnippet = "Hey! Let's review the release checklist before deploying the build.",
+                        packageName = it.packageName,
+                        appName = it.appName,
+                        avatarUri = it.avatarUri,
+                        timestampMs = it.timestampMs,
+                        isMasked = false,
+                        hasQuickReply = true
+                    )
+                }
+            }
+
+            // Expanded Notification Preview Card
+            if (activeMessage != null && isPreviewExpanded && !isDragging) {
+                val cardX = if (isOnRightEdge) {
+                    physicsController.offset.value.x - cardWidthPx - spacingPx
+                } else {
+                    physicsController.offset.value.x + physicsController.bubbleDiameterPx + spacingPx
+                }
+                val cardY = physicsController.offset.value.y.coerceIn(
+                    physicsController.minY,
+                    screenHeightPx - with(density) { 220.dp.toPx() }
+                )
+
+                Box(
+                    modifier = Modifier
+                        .offset { IntOffset(cardX.roundToInt(), cardY.roundToInt()) }
+                        .onGloballyPositioned { coordinates ->
+                            val bounds = coordinates.boundsInWindow()
+                            onBoundsUpdated(
+                                "preview_card",
+                                Rect(
+                                    bounds.left.toInt(),
+                                    bounds.top.toInt(),
+                                    bounds.right.toInt(),
+                                    bounds.bottom.toInt()
+                                )
+                            )
+                        }
+                ) {
+                    NotificationPreviewCard(
+                        notification = activeMessage,
+                        isVisible = isPreviewExpanded,
+                        isUnmasked = isUnmasked,
+                        isAnchoredToRight = isOnRightEdge,
+                        onReplyClick = {
+                            // Quick reply inline field trigger in Task 14
+                        },
+                        onMarkAsReadClick = {
+                            isPreviewExpanded = false
+                        },
+                        onDismissClick = {
+                            val activeId = activeBubble.conversationId
+                            stackState = stackState.removeBubble(activeId)
+                            isPreviewExpanded = false
+                        },
+                        onToggleUnmask = {
+                            isUnmasked = !isUnmasked
+                        }
+                    )
+                }
+            }
 
             // Multi-Conversation Bubble Stack
             if (stackState.bubbles.isNotEmpty()) {
@@ -133,6 +210,7 @@ fun BubbleOverlayContent(
                             detectDragGestures(
                                 onDragStart = {
                                     isDragging = true
+                                    isPreviewExpanded = false // Collapse card during drag
                                     velocityTracker.resetTracking()
                                 },
                                 onDrag = { change, dragAmount ->
@@ -183,10 +261,12 @@ fun BubbleOverlayContent(
                         isOnRightEdge = isOnRightEdge,
                         isDragging = isDragging,
                         onBubbleClick = { clickedBubble ->
-                            // Toggle flyout preview in Sprint 2
+                            // Tapping primary head toggles preview card
+                            isPreviewExpanded = !isPreviewExpanded
                         },
                         onSelectBubble = { conversationId ->
                             stackState = stackState.selectConversation(conversationId)
+                            isPreviewExpanded = true
                         }
                     )
                 }

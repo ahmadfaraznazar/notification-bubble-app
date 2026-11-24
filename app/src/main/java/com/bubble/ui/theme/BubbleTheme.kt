@@ -76,4 +76,7 @@ object BubbleTheme {
 
     val dimensions: BubbleDimensions
         get() = BubbleDimensions
+
+    val typography: androidx.compose.material3.Typography
+        get() = BubbleTypography
 }
