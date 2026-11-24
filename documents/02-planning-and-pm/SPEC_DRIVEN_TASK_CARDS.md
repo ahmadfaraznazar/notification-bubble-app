@@ -167,7 +167,7 @@ Every task card is atomic, completable in a single focused session, and touches 
 
 ### Sprint 1: Atomic UI & Drag Interactivity (Tasks 05–08)
 
-#### [ ] Task 05: Atomic Visual Primitives (`AvatarCircle`, `AppBadgeIcon`, `UnreadCounterBadge`)
+#### [x] Task 05: Atomic Visual Primitives (`AvatarCircle`, `AppBadgeIcon`, `UnreadCounterBadge`)
 - **User Story Reference**: Story 5, 11
 - **Files Touched**: `ui/atoms/AvatarCircle.kt`, `ui/atoms/AppBadgeIcon.kt`, `ui/atoms/UnreadCounterBadge.kt`, `ui/theme/BubbleTheme.kt`
 - **Acceptance Criteria**:
