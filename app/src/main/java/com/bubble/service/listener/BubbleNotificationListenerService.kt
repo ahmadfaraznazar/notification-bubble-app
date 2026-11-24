@@ -9,6 +9,7 @@ import com.bubble.data.repository.NotificationRepositoryImpl
 import com.bubble.data.repository.RuleRepositoryImpl
 import com.bubble.domain.model.AppRule
 import com.bubble.domain.model.NotificationMessage
+import com.bubble.domain.util.SensitiveContentFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,7 +19,7 @@ import java.util.Calendar
 
 /**
  * System NotificationListenerService intercepting incoming alerts from third-party apps.
- * Enforces Room-backed package whitelisting and quiet hours filtering.
+ * Enforces Room-backed package whitelisting, quiet hours filtering, and automated 2FA/OTP masking.
  */
 class BubbleNotificationListenerService : NotificationListenerService() {
 
@@ -49,7 +50,13 @@ class BubbleNotificationListenerService : NotificationListenerService() {
             return
         }
 
-        // 2. Ignore ongoing and foreground service notifications
+        // 2. Security Drop: Never spawn bubbles for authenticator apps (Google Authenticator, Authy, etc.)
+        if (SensitiveContentFilter.isBlacklistedPackage(packageName)) {
+            BubbleLog.d("NotificationListener", "Security drop: Package $packageName is an authenticator app")
+            return
+        }
+
+        // 3. Ignore ongoing and foreground service notifications
         val flags = notification.flags
         val isOngoing = (flags and Notification.FLAG_ONGOING_EVENT) != 0 ||
             (flags and Notification.FLAG_FOREGROUND_SERVICE) != 0
@@ -57,7 +64,7 @@ class BubbleNotificationListenerService : NotificationListenerService() {
             return
         }
 
-        // 3. Extract sender, message body, and metadata
+        // 4. Extract sender, message body, and metadata
         val extras = notification.extras
         val sender = extras.getString(Notification.EXTRA_CONVERSATION_TITLE)
             ?: extras.getString(Notification.EXTRA_TITLE)
@@ -73,7 +80,7 @@ class BubbleNotificationListenerService : NotificationListenerService() {
             return
         }
 
-        // 4. Resolve friendly app name
+        // 5. Resolve friendly app name
         val appName = try {
             val appInfo = packageManager.getApplicationInfo(packageName, 0)
             packageManager.getApplicationLabel(appInfo).toString()
@@ -81,7 +88,7 @@ class BubbleNotificationListenerService : NotificationListenerService() {
             packageName
         }
 
-        // 5. Evaluate Room database whitelist & quiet hours policy
+        // 6. Evaluate Room database whitelist & quiet hours policy
         serviceScope.launch {
             val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val isAllowed = ruleRepository.isPackageAllowed(packageName, currentHour)
@@ -91,33 +98,41 @@ class BubbleNotificationListenerService : NotificationListenerService() {
                 return@launch
             }
 
-            // 6. Detect inline quick-reply action support
+            // 7. Heuristic Sensitive Content & OTP/2FA Detection
+            val isSensitive = SensitiveContentFilter.isSensitive(packageName, sender, body)
+            val displaySnippet = if (isSensitive) {
+                SensitiveContentFilter.maskSnippet()
+            } else {
+                body
+            }
+
+            // 8. Detect inline quick-reply action support
             val hasQuickReply = notification.actions?.any { action ->
                 action.remoteInputs?.isNotEmpty() == true
             } ?: false
 
-            // 7. Assemble domain model with unique composite ID
+            // 9. Assemble domain model with unique composite ID
             val notificationId = "${packageName}_${sbn.id}_${sbn.tag.orEmpty()}"
             val message = NotificationMessage(
                 id = notificationId,
                 senderName = sender,
-                textSnippet = body,
+                textSnippet = displaySnippet,
                 packageName = packageName,
                 appName = appName,
                 avatarUri = null,
                 timestampMs = sbn.postTime,
-                isMasked = false,
+                isMasked = isSensitive,
                 hasQuickReply = hasQuickReply
             )
 
-            // 8. Privacy-safe redacted logging
+            // 10. Privacy-safe redacted logging
             BubbleLog.logNotificationReceived(
                 packageName = packageName,
                 bodyLength = body.length,
-                isMasked = false
+                isMasked = isSensitive
             )
 
-            // 9. Enqueue into reactive repository
+            // 11. Enqueue into reactive repository
             notificationRepository.enqueueNotification(message)
         }
     }

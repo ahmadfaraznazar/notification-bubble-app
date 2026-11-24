@@ -225,7 +225,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Pre-populates popular chat app IDs.
 - **Verification**: Run Room DAO unit tests verifying insert, query, and toggle operations.
 
-#### [ ] Task 11: Sensitive 2FA / OTP Auto-Masking Filter
+#### [x] Task 11: Sensitive 2FA / OTP Auto-Masking Filter
 - **User Story Reference**: Story 16
 - **Files Touched**: `domain/util/SensitiveContentFilter.kt`, `domain/util/SensitiveContentFilterTest.kt`
 - **Acceptance Criteria**:
