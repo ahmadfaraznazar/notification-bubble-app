@@ -81,4 +81,11 @@ class OverlayHostLayout @JvmOverloads constructor(
 
         return super.dispatchTouchEvent(event)
     }
+
+    override fun onApplyWindowInsets(insets: android.view.WindowInsets): android.view.WindowInsets {
+        for (i in 0 until childCount) {
+            getChildAt(i).dispatchApplyWindowInsets(insets)
+        }
+        return super.onApplyWindowInsets(insets)
+    }
 }

@@ -29,6 +29,7 @@ import com.bubble.domain.model.ActiveBubble
 import com.bubble.domain.model.BubbleStackState
 import com.bubble.domain.model.NotificationMessage
 import com.bubble.ui.interaction.BubblePhysicsController
+import com.bubble.ui.interaction.avoidKeyboard
 import com.bubble.ui.organisms.ActiveBubbleStack
 import com.bubble.ui.organisms.DismissTargetZone
 import com.bubble.ui.organisms.NotificationPreviewCard
@@ -39,7 +40,7 @@ import kotlin.math.roundToInt
 
 /**
  * Compose Overlay hierarchy managing spring physics, multi-conversation stacks,
- * magnetic dismiss target, and the floating expandable notification preview card.
+ * magnetic dismiss target, expandable preview card, and real-time keyboard avoidance.
  */
 @Composable
 fun BubbleOverlayContent(
@@ -144,7 +145,7 @@ fun BubbleOverlayContent(
                 }
             }
 
-            // Expanded Notification Preview Card
+            // Expanded Notification Preview Card (with Keyboard Avoidance)
             if (activeMessage != null && isPreviewExpanded && !isDragging) {
                 val cardX = if (isOnRightEdge) {
                     physicsController.offset.value.x - cardWidthPx - spacingPx
@@ -159,6 +160,11 @@ fun BubbleOverlayContent(
                 Box(
                     modifier = Modifier
                         .offset { IntOffset(cardX.roundToInt(), cardY.roundToInt()) }
+                        .avoidKeyboard(
+                            currentYPx = cardY,
+                            componentHeightPx = with(density) { 180.dp.toPx() },
+                            screenHeightPx = screenHeightPx
+                        )
                         .onGloballyPositioned { coordinates ->
                             val bounds = coordinates.boundsInWindow()
                             onBoundsUpdated(
@@ -178,7 +184,7 @@ fun BubbleOverlayContent(
                         isUnmasked = isUnmasked,
                         isAnchoredToRight = isOnRightEdge,
                         onReplyClick = {
-                            // Quick reply inline field trigger in Task 14
+                            // Quick reply inline field trigger in Task 16
                         },
                         onMarkAsReadClick = {
                             isPreviewExpanded = false
@@ -195,7 +201,7 @@ fun BubbleOverlayContent(
                 }
             }
 
-            // Multi-Conversation Bubble Stack
+            // Multi-Conversation Bubble Stack (with Keyboard Avoidance)
             if (stackState.bubbles.isNotEmpty()) {
                 Box(
                     modifier = Modifier
@@ -205,6 +211,11 @@ fun BubbleOverlayContent(
                                 physicsController.offset.value.y.roundToInt()
                             )
                         }
+                        .avoidKeyboard(
+                            currentYPx = physicsController.offset.value.y,
+                            componentHeightPx = physicsController.bubbleDiameterPx,
+                            screenHeightPx = screenHeightPx
+                        )
                         .scale(physicsController.scale.value)
                         .pointerInput(physicsController) {
                             detectDragGestures(
@@ -261,7 +272,6 @@ fun BubbleOverlayContent(
                         isOnRightEdge = isOnRightEdge,
                         isDragging = isDragging,
                         onBubbleClick = { clickedBubble ->
-                            // Tapping primary head toggles preview card
                             isPreviewExpanded = !isPreviewExpanded
                         },
                         onSelectBubble = { conversationId ->

@@ -1,21 +1,22 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 3 Underway - Task 13 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 3 Underway - Tasks 13 & 14 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is in active development.
-> - **Sprint 0 Sealed**: Tasks 01–04 complete (Scaffolding, WindowManager overlay, Boot revival, 120Hz physics).
-> - **Sprint 1 Sealed**: Tasks 05–08 complete (Atoms, Molecule, Dismiss Black Hole, Staggered BubbleStack).
-> - **Sprint 2 Sealed**: Tasks 09–12 complete (Listener pipeline, Room SQLite, OTP auto-masking, App Picker).
-> - **Task 13 Completed**: Expanded Flyout Notification Preview Card (`NotificationPreviewCard.kt`, `PreviewCardViewModel.kt`, tap-to-unmask, action pills row).
-> - **Immediate Next Step**: Begin **Task 14: Keyboard Inset Sensor (`WindowInsets.Type.ime()`)**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-14-keyboard-inset-sensor-windowinsetstypeime](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `KeyboardInsetObserver.kt` / `avoidKeyboard` modifier listening to `WindowInsets.Type.ime()` and smoothly translating floating bubbles and flyout cards above on-screen software keyboards.
+> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is at the halfway milestone.
+> - **Sprint 0 Sealed**: Tasks 01–04 complete.
+> - **Sprint 1 Sealed**: Tasks 05–08 complete.
+> - **Sprint 2 Sealed**: Tasks 09–12 complete.
+> - **Task 13 Completed**: Expanded Flyout Notification Preview Card (`NotificationPreviewCard.kt`, `PreviewCardViewModel.kt`).
+> - **Task 14 Completed**: Keyboard Inset Sensor (`KeyboardInsetObserver.kt`, `avoidKeyboard` modifier, WindowManager resize mode).
+> - **Immediate Next Step**: Begin **Task 15: Landscape & Full-Screen Auto-Dock to Side-Pill**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-15-landscape--full-screen-auto-dock-to-side-pill](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `OrientationObserver.kt` and `DockedSidePill.kt` detecting landscape orientation or full-screen gaming and collapsing bubbles into a subtle 40% translucent 12dp edge tab.
 
 ---
 

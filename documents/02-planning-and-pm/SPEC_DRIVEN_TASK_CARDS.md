@@ -256,7 +256,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Action pills: `[Reply]`, `[Mark Read]`, and `[Dismiss]`.
 - **Verification**: Tap active bubble; preview card expands smoothly with spring enter transition.
 
-#### [ ] Task 14: Keyboard Inset Sensor (`WindowInsets.Type.ime()`)
+#### [x] Task 14: Keyboard Inset Sensor (`WindowInsets.Type.ime()`)
 - **User Story Reference**: Story 14
 - **Files Touched**: `ui/interaction/KeyboardInsetObserver.kt`, `service/OverlayService.kt`
 - **Acceptance Criteria**:
