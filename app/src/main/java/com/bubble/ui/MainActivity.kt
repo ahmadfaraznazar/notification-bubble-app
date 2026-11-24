@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,11 +22,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,25 +40,53 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.bubble.service.overlay.OverlayService
+import com.bubble.ui.onboarding.AppPickerScreen
+import com.bubble.ui.onboarding.AppPickerViewModel
+
+enum class NavigationScreen {
+    DASHBOARD,
+    APP_PICKER
+}
 
 /**
  * Main application dashboard and onboarding entry point.
- * Guides users through permission grants and overlay service controls.
+ * Guides users through permission grants, service controls, and app whitelisting.
  */
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val appPickerViewModel = AppPickerViewModel.create(this)
+
         setContent {
-            BubbleAppDashboard()
+            var currentScreen by remember { mutableStateOf(NavigationScreen.DASHBOARD) }
+
+            when (currentScreen) {
+                NavigationScreen.DASHBOARD -> {
+                    BubbleAppDashboard(
+                        appPickerViewModel = appPickerViewModel,
+                        onNavigateToAppPicker = { currentScreen = NavigationScreen.APP_PICKER }
+                    )
+                }
+                NavigationScreen.APP_PICKER -> {
+                    AppPickerScreen(
+                        viewModel = appPickerViewModel,
+                        onNavigateBack = { currentScreen = NavigationScreen.DASHBOARD }
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BubbleAppDashboard() {
+fun BubbleAppDashboard(
+    appPickerViewModel: AppPickerViewModel,
+    onNavigateToAppPicker: () -> Unit
+) {
     val context = LocalContext.current
-    var hasOverlayPermission by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
+    val hasOverlayPermission by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
+    val pickerUiState by appPickerViewModel.uiState.collectAsState()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -162,6 +188,57 @@ fun BubbleAppDashboard() {
                         ) {
                             Text("Grant Permission")
                         }
+                    }
+                }
+            }
+
+            // App Whitelist Configuration Card
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "App Whitelist",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White,
+                            fontSize = 16.sp
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = Color(0xFF0369A1),
+                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
+                        ) {
+                            Text(
+                                text = "${pickerUiState.enabledCount} enabled",
+                                color = Color(0xFFE0F2FE),
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Choose which messaging and chat apps are authorized to spawn floating bubbles.",
+                        color = Color(0xFF94A3B8),
+                        fontSize = 13.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button(
+                        onClick = onNavigateToAppPicker,
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2563EB)),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Configure Apps")
                     }
                 }
             }

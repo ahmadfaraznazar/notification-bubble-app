@@ -1,22 +1,24 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 2 Underway - Tasks 09, 10 & 11 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 2 100% Complete - Ready for Sprint 3)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 2 (Notification Listener & Filtering)** is 75% complete.
-> - **Sprint 0 Sealed**: Tasks 01–04 complete.
-> - **Sprint 1 Sealed**: Tasks 05–08 complete.
-> - **Task 09 Completed**: `NotificationListenerService` Ingestion Pipeline.
-> - **Task 10 Completed**: Local Room SQLite Database for App Whitelist & Settings.
-> - **Task 11 Completed**: Sensitive 2FA / OTP Auto-Masking Filter (`SensitiveContentFilter.kt`, authenticator dropping, `"•••••• (Tap to view)"` masking).
-> - **Immediate Next Step**: Begin **Task 12: Onboarding App Picker (0 Default + `[Chats Only]` Preset)**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-12-onboarding-app-picker-0-default--chats-only-preset](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `AppPickerList.kt` and `AppPickerViewModel.kt` querying installed launchable applications via `PackageManager`, defaulting to 0 checked, with a 1-tap `[Chats Only]` preset and instant Room persistence.
+> **Current Standing**: **Sprint 2 (Notification Listener & Filtering) is 100% Complete & Sealed!**
+> - **Sprint 0 Sealed**: Tasks 01–04 complete (Scaffolding, WindowManager overlay, Boot revival, 120Hz physics).
+> - **Sprint 1 Sealed**: Tasks 05–08 complete (Atoms, Molecule, Dismiss Black Hole, Staggered BubbleStack).
+> - **Sprint 2 Sealed**: Tasks 09–12 complete:
+>   - Task 09: `NotificationListenerService` Ingestion Pipeline (`BubbleNotificationListenerService`).
+>   - Task 10: Local Room SQLite Database for App Whitelist & Settings (`AppDatabase`, `AppRuleEntity`, `AppRuleDao`, `RuleRepositoryImpl`).
+>   - Task 11: Sensitive 2FA / OTP Auto-Masking Filter (`SensitiveContentFilter.kt`).
+>   - Task 12: Onboarding App Picker (`AppPickerList.kt`, `AppPickerViewModel.kt`, 0-default selection, 1-tap `[Chats Only]` preset).
+> - **Immediate Next Step**: Begin **Sprint 3: Floating Overlay Experience & Quick Reply** starting with **Task 13: Expanded Notification Preview Card**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#sprint-3-floating-overlay-experience--quick-reply-tasks-1316](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `NotificationPreviewCard.kt` rendering a 300dp compact card anchored adjacent to the resting bubble, showing sender title, message snippet, and quick action buttons.
 
 ---
 

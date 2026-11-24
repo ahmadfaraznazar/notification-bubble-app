@@ -234,7 +234,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Unmasks only on explicit intentional tap.
 - **Verification**: Run unit test suite testing 20 diverse banking and OTP text patterns.
 
-#### [ ] Task 12: Onboarding App Picker (0 Default + `[Chats Only]` Preset)
+#### [x] Task 12: Onboarding App Picker (0 Default + `[Chats Only]` Preset)
 - **User Story Reference**: Story 4
 - **Files Touched**: `ui/onboarding/AppPickerList.kt`, `ui/onboarding/AppPickerViewModel.kt`
 - **Acceptance Criteria**:
