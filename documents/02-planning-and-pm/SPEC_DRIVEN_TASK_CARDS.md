@@ -313,7 +313,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - 1-tap `[Restore Purchase]` queries active purchases and persists state in Room.
 - **Verification**: Perform test purchase with Google Play license test account; verify Pro features unlock.
 
-#### [ ] Task 20: R8 ProGuard Optimization, Vector Assets & < 5MB Binary Audit
+#### [x] Task 20: R8 ProGuard Optimization, Vector Assets & < 5MB Binary Audit
 - **User Story Reference**: Architecture Contract
 - **Files Touched**: `app/proguard-rules.pro`, `app/build.gradle.kts`
 - **Acceptance Criteria**:
