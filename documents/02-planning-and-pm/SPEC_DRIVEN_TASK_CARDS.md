@@ -194,7 +194,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Releasing inside target dismisses bubble with scale-to-zero exit animation.
 - **Verification**: Drag bubble toward bottom-center; observe magnetic attraction and smooth dismissal.
 
-#### [ ] Task 08: Organism `ActiveBubbleStack` (Multi-Conversation Stagger)
+#### [x] Task 08: Organism `ActiveBubbleStack` (Multi-Conversation Stagger)
 - **User Story Reference**: Story 11
 - **Files Touched**: `ui/organisms/ActiveBubbleStack.kt`, `domain/model/BubbleStackState.kt`
 - **Acceptance Criteria**:

@@ -21,15 +21,16 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import com.bubble.domain.model.ActiveBubble
+import com.bubble.domain.model.BubbleStackState
 import com.bubble.ui.interaction.BubblePhysicsController
-import com.bubble.ui.molecules.FloatingBubbleItem
+import com.bubble.ui.organisms.ActiveBubbleStack
 import com.bubble.ui.theme.BubbleTheme
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
  * Compose Overlay hierarchy with spring physics, 120Hz gesture tracking,
- * and the FloatingBubbleItem interactive molecule.
+ * and the multi-conversation ActiveBubbleStack organism.
  */
 @Composable
 fun BubbleOverlayContent(
@@ -39,15 +40,37 @@ fun BubbleOverlayContent(
     val density = LocalDensity.current
     val coroutineScope = rememberCoroutineScope()
 
-    // Sample active bubble state (will be replaced by StateFlow in Sprint 2)
-    val sampleBubble = remember {
-        ActiveBubble(
-            conversationId = "demo_chat_1",
-            senderName = "Alex Rivera",
-            avatarUri = null,
-            packageName = "org.telegram.messenger",
-            appName = "Telegram",
-            unreadCount = 3
+    // Sample multi-conversation stack state
+    var stackState by remember {
+        mutableStateOf(
+            BubbleStackState(
+                bubbles = listOf(
+                    ActiveBubble(
+                        conversationId = "chat_tg_1",
+                        senderName = "Alex Rivera",
+                        avatarUri = null,
+                        packageName = "org.telegram.messenger",
+                        appName = "Telegram",
+                        unreadCount = 2
+                    ),
+                    ActiveBubble(
+                        conversationId = "chat_wa_2",
+                        senderName = "Sarah Connor",
+                        avatarUri = null,
+                        packageName = "com.whatsapp",
+                        appName = "WhatsApp",
+                        unreadCount = 1
+                    ),
+                    ActiveBubble(
+                        conversationId = "chat_slack_3",
+                        senderName = "Marcus Vance",
+                        avatarUri = null,
+                        packageName = "com.Slack",
+                        appName = "Slack",
+                        unreadCount = 4
+                    )
+                )
+            )
         )
     }
 
@@ -70,7 +93,10 @@ fun BubbleOverlayContent(
 
             val velocityTracker = remember { VelocityTracker() }
 
-            // Interactive Floating Bubble Molecule
+            val isOnRightEdge = physicsController.offset.value.x >
+                (screenWidthPx - physicsController.bubbleDiameterPx) / 2f
+
+            // Multi-Conversation Bubble Stack
             Box(
                 modifier = Modifier
                     .offset {
@@ -111,7 +137,7 @@ fun BubbleOverlayContent(
                     .onGloballyPositioned { coordinates ->
                         val bounds = coordinates.boundsInWindow()
                         onBoundsUpdated(
-                            "bubble_primary",
+                            "bubble_stack_primary",
                             Rect(
                                 bounds.left.toInt(),
                                 bounds.top.toInt(),
@@ -121,11 +147,16 @@ fun BubbleOverlayContent(
                         )
                     }
             ) {
-                FloatingBubbleItem(
-                    bubble = sampleBubble,
+                ActiveBubbleStack(
+                    stackState = stackState,
+                    isOnRightEdge = isOnRightEdge,
                     isDragging = isDragging,
-                    onClick = {
-                        // Expansion toggle hook for Task 07 / Sprint 2
+                    onBubbleClick = { clickedBubble ->
+                        // Tapped top head: toggle flyout preview in Task 08
+                    },
+                    onSelectBubble = { conversationId ->
+                        // Tapped underlying head: promote to top
+                        stackState = stackState.selectConversation(conversationId)
                     }
                 )
             }
