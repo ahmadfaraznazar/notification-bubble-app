@@ -1,25 +1,22 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 3 Complete & Sealed - Sprints 0, 1, 2, and 3 100% Sealed)
+> **Last Updated**: 2026-11-24 (Sprint 4 Underway - Task 17 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 3 (Flyout Card, Keyboard & Insets)** is **100% Complete & Sealed**.
+> **Current Standing**: **Sprint 4 (Onboarding, Monetization & Release)** is 25% complete.
 > - **Sprint 0 Sealed**: Tasks 01–04 complete (`b8117b3`, `193c61a`, `23c43b4`, `375569c`).
 > - **Sprint 1 Sealed**: Tasks 05–08 complete (`e7af3ac`, `2ebb242`, `aff064e`, `7ea7f8d`).
 > - **Sprint 2 Sealed**: Tasks 09–12 complete (`8e8e71d`, `f8fccc8`, `8082075`, `9330766`).
-> - **Sprint 3 Sealed**: Tasks 13–16 complete:
->   - Task 13: Expanded Flyout Notification Preview Card (`NotificationPreviewCard.kt`, `PreviewCardViewModel.kt`).
->   - Task 14: Keyboard Inset Sensor (`KeyboardInsetObserver.kt`, `avoidKeyboard` modifier).
->   - Task 15: Landscape & Full-Screen Auto-Dock to Side-Pill (`OrientationObserver.kt`, `DockedSidePill.kt`).
->   - Task 16: Inline Quick Reply Intent & RemoteInput Dispatch (`QuickReplyInput.kt`, `NotificationActionDispatcher.kt`).
-> - **Immediate Next Step**: Begin **Sprint 4: Onboarding, Monetization & Release (Task 17: Mascot Onboarding Flow - "Bubby / Pebble" Permission Wizard)**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-17-mascot-onboarding-flow-bubby--pebble-permission-wizard](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `MascotWizardScreen.kt` and `MascotIllustration.kt` with permission guides for Overlay (`ACTION_MANAGE_OVERLAY_PERMISSION`), Notification Listener, and the Zero-Network privacy guarantee banner.
+> - **Sprint 3 Sealed**: Tasks 13–16 complete (`ec119c4`, `63f48af`, `c3201f3`, `3a764ef`).
+> - **Task 17 Completed**: Mascot Onboarding Flow ("Bubby" Permission Wizard) (`MascotIllustration.kt`, `MascotWizardScreen.kt`, `MascotWizardLogicTest.kt`).
+> - **Immediate Next Step**: Begin **Task 18: OEM Battery Exemption Deep-Link Wizard (`dontkillmyapp`)**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-18-oem-battery-exemption-deep-link-wizard-dontkillmyapp](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `OEMExemptionHelper.kt` and `OEMSetupDialog.kt` to detect device manufacturer (`Build.MANUFACTURER`: Samsung, Xiaomi, OnePlus, Huawei) and launch phone-specific autostart & battery settings.
 
 ---
 

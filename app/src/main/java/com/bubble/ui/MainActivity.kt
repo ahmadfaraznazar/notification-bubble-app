@@ -42,8 +42,12 @@ import androidx.core.content.ContextCompat
 import com.bubble.service.overlay.OverlayService
 import com.bubble.ui.onboarding.AppPickerScreen
 import com.bubble.ui.onboarding.AppPickerViewModel
+import com.bubble.ui.onboarding.MascotWizardScreen
+import com.bubble.ui.onboarding.checkNotificationListenerAccess
+import com.bubble.ui.onboarding.checkOverlayPermission
 
 enum class NavigationScreen {
+    MASCOT_ONBOARDING,
     DASHBOARD,
     APP_PICKER
 }
@@ -58,14 +62,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val appPickerViewModel = AppPickerViewModel.create(this)
 
+        val isFirstLaunch = !checkOverlayPermission(this) || !checkNotificationListenerAccess(this)
+        val initialScreen = if (isFirstLaunch) NavigationScreen.MASCOT_ONBOARDING else NavigationScreen.DASHBOARD
+
         setContent {
-            var currentScreen by remember { mutableStateOf(NavigationScreen.DASHBOARD) }
+            var currentScreen by remember { mutableStateOf(initialScreen) }
 
             when (currentScreen) {
+                NavigationScreen.MASCOT_ONBOARDING -> {
+                    MascotWizardScreen(
+                        onFinishOnboarding = {
+                            currentScreen = NavigationScreen.APP_PICKER
+                        }
+                    )
+                }
                 NavigationScreen.DASHBOARD -> {
                     BubbleAppDashboard(
                         appPickerViewModel = appPickerViewModel,
-                        onNavigateToAppPicker = { currentScreen = NavigationScreen.APP_PICKER }
+                        onNavigateToAppPicker = { currentScreen = NavigationScreen.APP_PICKER },
+                        onNavigateToWizard = { currentScreen = NavigationScreen.MASCOT_ONBOARDING }
                     )
                 }
                 NavigationScreen.APP_PICKER -> {
@@ -82,7 +97,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BubbleAppDashboard(
     appPickerViewModel: AppPickerViewModel,
-    onNavigateToAppPicker: () -> Unit
+    onNavigateToAppPicker: () -> Unit,
+    onNavigateToWizard: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val hasOverlayPermission by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
@@ -295,6 +311,14 @@ fun BubbleAppDashboard(
                         }
                     }
                 }
+            }
+
+            // Onboarding Wizard Replay Link
+            OutlinedButton(
+                onClick = onNavigateToWizard,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Replay Mascot Onboarding Guide", color = Color(0xFF38BDF8))
             }
         }
     }

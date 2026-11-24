@@ -287,7 +287,7 @@ Every task card is atomic, completable in a single focused session, and touches 
 
 ### Sprint 4: Onboarding, Monetization & Release (Tasks 17–20)
 
-#### [ ] Task 17: Mascot Onboarding Flow ("Bubby / Pebble" Permission Wizard)
+#### [x] Task 17: Mascot Onboarding Flow ("Bubby / Pebble" Permission Wizard)
 - **User Story Reference**: Story 1, 2
 - **Files Touched**: `ui/onboarding/MascotWizardScreen.kt`, `ui/onboarding/MascotIllustration.kt`
 - **Acceptance Criteria**:
