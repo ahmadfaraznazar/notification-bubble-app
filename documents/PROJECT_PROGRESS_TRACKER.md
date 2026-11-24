@@ -1,23 +1,24 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 4 Underway - Tasks 17 & 18 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 4 Underway - Tasks 17, 18 & 19 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 4 (Onboarding, Monetization & Release)** is **50% complete**.
+> **Current Standing**: **Sprint 4 (Onboarding, Monetization & Release)** is **75% complete**.
 > - **Sprint 0 Sealed**: Tasks 01–04 complete (`b8117b3`, `193c61a`, `23c43b4`, `375569c`).
 > - **Sprint 1 Sealed**: Tasks 05–08 complete (`e7af3ac`, `2ebb242`, `aff064e`, `7ea7f8d`).
 > - **Sprint 2 Sealed**: Tasks 09–12 complete (`8e8e71d`, `f8fccc8`, `8082075`, `9330766`).
 > - **Sprint 3 Sealed**: Tasks 13–16 complete (`ec119c4`, `63f48af`, `c3201f3`, `3a764ef`).
 > - **Task 17 Completed**: Mascot Onboarding Flow ("Bubby" Permission Wizard) (`MascotIllustration.kt`, `MascotWizardScreen.kt`, `MascotWizardLogicTest.kt`).
 > - **Task 18 Completed**: OEM Battery Exemption Deep-Link Wizard (`OEMExemptionHelper.kt`, `OEMSetupDialog.kt`, `OEMExemptionHelperTest.kt`).
-> - **Immediate Next Step**: Begin **Task 19: Google Play Billing v6 Integration ($3.99 Lifetime Pro)**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-19-google-play-billing-v6-integration-399-lifetime-pro](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Implement `BillingRepository.kt`, `ProPaywallScreen.kt`, and Room purchase caching to gate unlimited apps, premium themes, and 1-tap purchase restoration.
+> - **Task 19 Completed**: Google Play Billing v6 Integration ($3.99 Lifetime Pro) (`BillingRepository.kt`, `BillingRepositoryImpl.kt`, `PurchaseDao.kt`, `ProPaywallScreen.kt`, `BillingRepositoryTest.kt`).
+> - **Immediate Next Step**: Begin **Task 20: R8 ProGuard Optimization, Vector Assets & < 5MB Binary Audit**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-20-r8-proguard-optimization-vector-assets---5mb-binary-audit](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Audit XML vector assets, enable full R8 obfuscation and resource shrinking, bundle release binary, and verify final output is strictly **$< 5.0\text{MB}$**.
 
 ---
 

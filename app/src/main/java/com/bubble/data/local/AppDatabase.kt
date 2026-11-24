@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bubble.data.local.dao.ActiveConversationDao
 import com.bubble.data.local.dao.AppRuleDao
+import com.bubble.data.local.dao.PurchaseDao
 import com.bubble.data.local.entity.ActiveConversationEntity
 import com.bubble.data.local.entity.AppRuleEntity
 import com.bubble.data.local.entity.PurchaseEntity
@@ -27,6 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appRuleDao(): AppRuleDao
     abstract fun activeConversationDao(): ActiveConversationDao
+    abstract fun purchaseDao(): PurchaseDao
 
     companion object {
         private const val DATABASE_NAME = "notification_bubble.db"

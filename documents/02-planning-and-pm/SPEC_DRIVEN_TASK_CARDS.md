@@ -304,7 +304,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Provides direct 1-tap intent to phone-specific autostart and battery exemption settings.
 - **Verification**: Test on Samsung/Xiaomi device; tap button and verify correct system settings page opens.
 
-#### [ ] Task 19: Google Play Billing v6 Integration ($3.99 Lifetime Pro)
+#### [x] Task 19: Google Play Billing v6 Integration ($3.99 Lifetime Pro)
 - **User Story Reference**: Story 19, 20
 - **Files Touched**: `data/billing/BillingRepository.kt`, `ui/settings/ProPaywallScreen.kt`
 - **Acceptance Criteria**:

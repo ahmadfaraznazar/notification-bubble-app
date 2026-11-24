@@ -39,6 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import com.bubble.data.repository.BillingRepositoryImpl
 import com.bubble.service.oem.OEMExemptionHelper
 import com.bubble.service.overlay.OverlayService
 import com.bubble.ui.onboarding.AppPickerScreen
@@ -47,11 +48,13 @@ import com.bubble.ui.onboarding.MascotWizardScreen
 import com.bubble.ui.onboarding.OEMSetupDialog
 import com.bubble.ui.onboarding.checkNotificationListenerAccess
 import com.bubble.ui.onboarding.checkOverlayPermission
+import com.bubble.ui.settings.ProPaywallScreen
 
 enum class NavigationScreen {
     MASCOT_ONBOARDING,
     DASHBOARD,
-    APP_PICKER
+    APP_PICKER,
+    PRO_PAYWALL
 }
 
 /**
@@ -60,9 +63,13 @@ enum class NavigationScreen {
  */
 class MainActivity : ComponentActivity() {
 
+    private lateinit var billingRepository: BillingRepositoryImpl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val appPickerViewModel = AppPickerViewModel.create(this)
+        billingRepository = BillingRepositoryImpl.getInstance(this)
+        billingRepository.startConnection()
 
         val isFirstLaunch = !checkOverlayPermission(this) || !checkNotificationListenerAccess(this)
         val initialScreen = if (isFirstLaunch) NavigationScreen.MASCOT_ONBOARDING else NavigationScreen.DASHBOARD
@@ -81,8 +88,10 @@ class MainActivity : ComponentActivity() {
                 NavigationScreen.DASHBOARD -> {
                     BubbleAppDashboard(
                         appPickerViewModel = appPickerViewModel,
+                        billingRepository = billingRepository,
                         onNavigateToAppPicker = { currentScreen = NavigationScreen.APP_PICKER },
-                        onNavigateToWizard = { currentScreen = NavigationScreen.MASCOT_ONBOARDING }
+                        onNavigateToWizard = { currentScreen = NavigationScreen.MASCOT_ONBOARDING },
+                        onNavigateToPaywall = { currentScreen = NavigationScreen.PRO_PAYWALL }
                     )
                 }
                 NavigationScreen.APP_PICKER -> {
@@ -91,20 +100,34 @@ class MainActivity : ComponentActivity() {
                         onNavigateBack = { currentScreen = NavigationScreen.DASHBOARD }
                     )
                 }
+                NavigationScreen.PRO_PAYWALL -> {
+                    ProPaywallScreen(
+                        billingRepository = billingRepository,
+                        onDismiss = { currentScreen = NavigationScreen.DASHBOARD }
+                    )
+                }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        billingRepository.endConnection()
     }
 }
 
 @Composable
 fun BubbleAppDashboard(
     appPickerViewModel: AppPickerViewModel,
+    billingRepository: BillingRepositoryImpl,
     onNavigateToAppPicker: () -> Unit,
-    onNavigateToWizard: () -> Unit = {}
+    onNavigateToWizard: () -> Unit = {},
+    onNavigateToPaywall: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val hasOverlayPermission by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
     val isBatteryOptimized by remember { mutableStateOf(OEMExemptionHelper.isBatteryOptimizationIgnored(context)) }
+    val isPro by billingRepository.isProActive.collectAsState()
     val brand = remember { OEMExemptionHelper.detectBrand() }
     var showOemDialog by remember { mutableStateOf(false) }
     val pickerUiState by appPickerViewModel.uiState.collectAsState()
@@ -166,6 +189,67 @@ fun BubbleAppDashboard(
                             color = Color(0xFF94A3B8),
                             fontSize = 12.sp
                         )
+                    }
+                }
+            }
+
+            // Pro Status & Monetization Card
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = if (isPro) Color(0xFF064E3B) else Color(0xFF1E293B)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(text = "👑", fontSize = 20.sp)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = if (isPro) "Bubbles Pro Active" else "Bubbles Free Tier",
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.White,
+                                fontSize = 16.sp
+                            )
+                        }
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = if (isPro) Color(0xFF065F46) else Color(0xFF475569),
+                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
+                        ) {
+                            Text(
+                                text = if (isPro) "LIFETIME" else "3 APPS MAX",
+                                color = if (isPro) Color(0xFF34D399) else Color(0xFFE2E8F0),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = if (isPro) {
+                            "Unlimited app bubbles, OLED black theme, and 120Hz gesture physics unlocked."
+                        } else {
+                            "Upgrade to unlock unlimited simultaneous apps and premium visual skins ($3.99 single purchase)."
+                        },
+                        color = Color(0xFF94A3B8),
+                        fontSize = 13.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button(
+                        onClick = onNavigateToPaywall,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (isPro) Color(0xFF059669) else Color(0xFFD97706)
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(if (isPro) "View Pro Status" else "Unlock Lifetime Pro ($3.99)")
                     }
                 }
             }
