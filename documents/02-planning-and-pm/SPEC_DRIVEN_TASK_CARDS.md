@@ -185,7 +185,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Triggers light haptic feedback on touch down.
 - **Verification**: Tap bubble on device; verify subtle press animation and haptic vibration.
 
-#### [ ] Task 07: Organism `DismissTargetZone` ("The Magnetic Black Hole")
+#### [x] Task 07: Organism `DismissTargetZone` ("The Magnetic Black Hole")
 - **User Story Reference**: Story 9
 - **Files Touched**: `ui/organisms/DismissTargetZone.kt`, `ui/interaction/MagneticPullSensor.kt`
 - **Acceptance Criteria**:

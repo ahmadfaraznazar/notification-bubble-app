@@ -44,6 +44,12 @@ class BubblePhysicsController(
             y = screenHeightPx - navBarHeightPx - with(density) { 48.dp.toPx() }
         )
 
+    val dismissSnapOffset: Offset
+        get() = Offset(
+            x = dismissTargetCenter.x - bubbleDiameterPx / 2f,
+            y = dismissTargetCenter.y - bubbleDiameterPx / 2f
+        )
+
     /**
      * Determines whether the bubble center is within magnetic pull range of the dismiss target.
      */
@@ -61,11 +67,26 @@ class BubblePhysicsController(
 
     /**
      * In-place drag coordinate update without instantiating new objects in hot loop.
+     * When near magnetic target, smoothly damps and pulls toward center.
      */
     suspend fun onDrag(dragAmount: Offset) {
-        val newX = (offset.value.x + dragAmount.x).coerceIn(minX, maxX)
-        val newY = (offset.value.y + dragAmount.y).coerceIn(minY, maxY)
-        offset.snapTo(Offset(newX, newY))
+        val rawX = offset.value.x + dragAmount.x
+        val rawY = offset.value.y + dragAmount.y
+
+        val targetOffset = Offset(rawX, rawY)
+        val isMagnetic = checkMagneticZone(targetOffset)
+
+        if (isMagnetic) {
+            // Magnetic attraction: pull 35% toward target center
+            val pullRatio = 0.35f
+            val pulledX = rawX + (dismissSnapOffset.x - rawX) * pullRatio
+            val pulledY = rawY + (dismissSnapOffset.y - rawY) * pullRatio
+            offset.snapTo(Offset(pulledX, pulledY))
+        } else {
+            val clampedX = rawX.coerceIn(minX, maxX)
+            val clampedY = rawY.coerceIn(minY, maxY)
+            offset.snapTo(Offset(clampedX, clampedY))
+        }
     }
 
     /**
@@ -98,6 +119,24 @@ class BubblePhysicsController(
             targetValue = targetOffset,
             animationSpec = animationSpec
         )
+    }
+
+    /**
+     * Handles finger lift: either executes magnetic dismiss or snaps to nearest edge.
+     */
+    suspend fun handleRelease(
+        currentVelocityX: Float,
+        onDismissed: () -> Unit
+    ) {
+        if (checkMagneticZone(offset.value)) {
+            offset.snapTo(dismissSnapOffset)
+            dismissWithExitAnimation()
+            onDismissed()
+            scale.snapTo(1.0f)
+            offset.snapTo(Offset(minX, screenHeightPx * 0.3f))
+        } else {
+            snapToNearestEdge(currentVelocityX)
+        }
     }
 
     /**
