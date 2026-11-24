@@ -1,19 +1,18 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-23 (Lifecycle Complete - All 6 Phases 100% Specified)
+> **Last Updated**: 2026-11-24 (Sprint 0 Underway - Task 01 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Instructions for Future Sessions / New Agent Chats**:
-> If the user says *"read all docs and continue"*, *"start coding"*, *"begin sprint 0"*, or similar:
-> 1. **Current Standing**: All 6 Lifecycle Phases (Ideation, Planning, Architecture, Design, Monetization, Engineering Ops) are **100% Complete & Sealed**.
-> 2. **Immediate Action on Resume**: Begin **Implementation (Sprint 0: Foundation & Overlay Engine)** starting with **Task 01: Android Project Scaffolding & Lean Gradle Config**.
-> 3. **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#sprint-0-foundation--overlay-engine-tasks-0104](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> 4. **Deliverable Target**: Generate root and app-level `build.gradle.kts`, `settings.gradle.kts`, and `AndroidManifest.xml` with zero internet permissions, Kotlin 2.0+, Jetpack Compose BOM, and R8 full mode.
+> **Current Standing**: Sprint 0 (Foundation & Overlay Engine) is in active development.
+> - **Task 01 Completed**: Android Project Scaffolding & Lean Gradle Config (BOM 2024.06.00, Kotlin 2.0+, KSP, R8, Zero-Network manifest).
+> - **Immediate Next Step**: Begin **Task 02: Full-Screen Transparent WindowManager Compose Host**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-02-full-screen-transparent-windowmanager-compose-host](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Create `OverlayService.kt` and `OverlayHostView.kt` with `SYSTEM_ALERT_WINDOW`, `FLAG_NOT_TOUCH_MODAL`, and `FLAG_NOT_FOCUSABLE` touch pass-through.
 
 ---
 

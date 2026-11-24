@@ -126,7 +126,7 @@ Every task card is atomic, completable in a single focused session, and touches 
 
 ### Sprint 0: Foundation & Overlay Engine (Tasks 01–04)
 
-#### [ ] Task 01: Android Project Scaffolding & Lean Gradle Config
+#### [x] Task 01: Android Project Scaffolding & Lean Gradle Config
 - **User Story Reference**: Story 18, 19
 - **Files Touched**: `build.gradle.kts`, `app/build.gradle.kts`, `settings.gradle.kts`, `app/src/main/AndroidManifest.xml`
 - **Acceptance Criteria**:

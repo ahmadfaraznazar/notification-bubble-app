@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notification Bubble</string>
+    <string name="notification_channel_name">Bubble Service Status</string>
+    <string name="notification_channel_desc">Maintains active floating notification bubbles</string>
+</resources>
