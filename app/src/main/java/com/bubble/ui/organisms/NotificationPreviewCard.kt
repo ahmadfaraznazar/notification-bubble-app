@@ -23,6 +23,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bubble.domain.model.NotificationMessage
 import com.bubble.ui.interaction.SpringMotion
+import com.bubble.ui.molecules.QuickReplyInput
 import com.bubble.ui.theme.BubbleDimensions
 import com.bubble.ui.theme.BubbleTheme
 import java.text.SimpleDateFormat
@@ -45,20 +50,22 @@ import java.util.Locale
 /**
  * Organism representing the expanded floating notification preview card.
  * Anchored adjacent to the resting bubble, offering glanceable reading,
- * tap-to-unmask privacy protection, and immediate action buttons.
+ * tap-to-unmask privacy protection, and inline QuickReplyInput.
  */
 @Composable
 fun NotificationPreviewCard(
     notification: NotificationMessage?,
     isVisible: Boolean,
     isUnmasked: Boolean,
-    onReplyClick: () -> Unit,
+    onSendReply: (String) -> Unit,
     onMarkAsReadClick: () -> Unit,
     onDismissClick: () -> Unit,
     onToggleUnmask: () -> Unit,
     modifier: Modifier = Modifier,
     isAnchoredToRight: Boolean = false
 ) {
+    var isReplying by remember { mutableStateOf(false) }
+
     AnimatedVisibility(
         visible = isVisible && notification != null,
         enter = fadeIn() + scaleIn(
@@ -102,7 +109,6 @@ fun NotificationPreviewCard(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Mini App Source Indicator
                     Box(
                         modifier = Modifier
                             .size(16.dp)
@@ -179,37 +185,49 @@ fun NotificationPreviewCard(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // 4. Footer Actions Row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (notification.hasQuickReply) {
+                // 4. Footer: QuickReplyInput or Action Buttons Row
+                if (isReplying) {
+                    QuickReplyInput(
+                        onSendReply = { text ->
+                            onSendReply(text)
+                            isReplying = false
+                        },
+                        onCancel = {
+                            isReplying = false
+                        }
+                    )
+                } else {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (notification.hasQuickReply) {
+                            CardActionButton(
+                                label = "Reply",
+                                icon = "💬",
+                                onClick = { isReplying = true },
+                                isPrimary = true,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+
                         CardActionButton(
-                            label = "Reply",
-                            icon = "💬",
-                            onClick = onReplyClick,
-                            isPrimary = true,
+                            label = "Read",
+                            icon = "✓",
+                            onClick = onMarkAsReadClick,
+                            isPrimary = false,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        CardActionButton(
+                            label = "Dismiss",
+                            icon = "✕",
+                            onClick = onDismissClick,
+                            isPrimary = false,
                             modifier = Modifier.weight(1f)
                         )
                     }
-
-                    CardActionButton(
-                        label = "Read",
-                        icon = "✓",
-                        onClick = onMarkAsReadClick,
-                        isPrimary = false,
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    CardActionButton(
-                        label = "Dismiss",
-                        icon = "✕",
-                        onClick = onDismissClick,
-                        isPrimary = false,
-                        modifier = Modifier.weight(1f)
-                    )
                 }
             }
         }

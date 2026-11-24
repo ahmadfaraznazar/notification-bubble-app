@@ -25,6 +25,7 @@ import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.IntOffset
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.bubble.domain.model.ActiveBubble
 import com.bubble.domain.model.BubbleStackState
 import com.bubble.domain.model.NotificationMessage
+import com.bubble.service.action.NotificationActionDispatcher
 import com.bubble.ui.atoms.DockedSidePill
 import com.bubble.ui.interaction.BubblePhysicsController
 import com.bubble.ui.interaction.OrientationObserver
@@ -55,6 +57,7 @@ fun BubbleOverlayContent(
     modifier: Modifier = Modifier
 ) {
     val density = LocalDensity.current
+    val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val configuration = LocalConfiguration.current
     val coroutineScope = rememberCoroutineScope()
@@ -239,8 +242,15 @@ fun BubbleOverlayContent(
                             isVisible = isPreviewExpanded,
                             isUnmasked = isUnmasked,
                             isAnchoredToRight = isOnRightEdge,
-                            onReplyClick = {
-                                // Quick reply inline field trigger in Task 16
+                            onSendReply = { replyText ->
+                                NotificationActionDispatcher.dispatchReply(
+                                    context = context,
+                                    notificationId = activeMessage.id,
+                                    replyText = replyText
+                                )
+                                val activeId = activeBubble.conversationId
+                                stackState = stackState.removeBubble(activeId)
+                                isPreviewExpanded = false
                             },
                             onMarkAsReadClick = {
                                 isPreviewExpanded = false

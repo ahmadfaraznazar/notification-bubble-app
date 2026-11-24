@@ -10,6 +10,7 @@ import com.bubble.data.repository.RuleRepositoryImpl
 import com.bubble.domain.model.AppRule
 import com.bubble.domain.model.NotificationMessage
 import com.bubble.domain.util.SensitiveContentFilter
+import com.bubble.service.action.NotificationActionDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -107,12 +108,19 @@ class BubbleNotificationListenerService : NotificationListenerService() {
             }
 
             // 8. Detect inline quick-reply action support
-            val hasQuickReply = notification.actions?.any { action ->
+            val replyAction = notification.actions?.firstOrNull { action ->
                 action.remoteInputs?.isNotEmpty() == true
-            } ?: false
+            }
+            val hasQuickReply = replyAction != null
 
             // 9. Assemble domain model with unique composite ID
             val notificationId = "${packageName}_${sbn.id}_${sbn.tag.orEmpty()}"
+
+            // Cache quick-reply action for zero-latency local dispatch
+            if (replyAction != null) {
+                NotificationActionDispatcher.registerAction(notificationId, replyAction)
+            }
+
             val message = NotificationMessage(
                 id = notificationId,
                 senderName = sender,
@@ -146,6 +154,7 @@ class BubbleNotificationListenerService : NotificationListenerService() {
 
         val notificationId = "${packageName}_${sbn.id}_${sbn.tag.orEmpty()}"
         BubbleLog.d("NotificationListener", "Dismissing notification: id=$notificationId")
+        NotificationActionDispatcher.removeAction(notificationId)
 
         serviceScope.launch {
             notificationRepository.dismissNotification(notificationId)

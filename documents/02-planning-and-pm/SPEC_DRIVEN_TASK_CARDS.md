@@ -274,7 +274,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - Tapping side-tab restores normal bubble state.
 - **Verification**: Rotate phone to landscape; verify bubble transitions to unobtrusive side-pill.
 
-#### [ ] Task 16: Inline Quick Reply Intent & RemoteInput Dispatch
+#### [x] Task 16: Inline Quick Reply Intent & RemoteInput Dispatch
 - **User Story Reference**: Story 12
 - **Files Touched**: `ui/molecules/QuickReplyInput.kt`, `service/NotificationActionDispatcher.kt`
 - **Acceptance Criteria**:
