@@ -1,19 +1,20 @@
 # Project Progress Tracker: Notification Bubble App
 
 > **Status Dashboard**: This document tracks our real-time progress across all 6 phases of the Application Development Lifecycle conforming to the AI Skills Library.
-> **Last Updated**: 2026-11-24 (Sprint 1 Underway - Task 05 Complete)
+> **Last Updated**: 2026-11-24 (Sprint 1 Underway - Tasks 05 & 06 Complete)
 
 ---
 
 ## 🎯 Current Milestone & Immediate Next Step (Session Resume Anchor)
 
 > [!IMPORTANT]
-> **Current Standing**: **Sprint 1 (Atomic UI & Drag Interactivity)** is in active development.
-> - **Sprint 0 Sealed**: Tasks 01–04 complete (Scaffolding, WindowManager overlay, Boot revival, 120Hz physics).
-> - **Task 05 Completed**: Atomic Visual Primitives (`AvatarCircle`, `AppBadgeIcon`, `UnreadCounterBadge`, `BubbleTheme`, and dimension/color tokens).
-> - **Immediate Next Step**: Begin **Task 06: Interactive Molecule `FloatingBubbleItem` with Haptic Feedback**.
-> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-06-interactive-molecule-floatingbubbleitem-with-haptic-feedback](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
-> - **Deliverable Target**: Compose `FloatingBubbleItem.kt` combining the three visual atoms, touch elevation states, press scale recoil (`0.92f`), and subtle haptic feedback.
+> **Current Standing**: **Sprint 1 (Atomic UI & Drag Interactivity)** is at the halfway milestone.
+> - **Sprint 0 Sealed**: Tasks 01–04 complete.
+> - **Task 05 Completed**: Atomic Visual Primitives (`AvatarCircle`, `AppBadgeIcon`, `UnreadCounterBadge`, `BubbleTheme`).
+> - **Task 06 Completed**: Interactive Molecule `FloatingBubbleItem` with Haptic Feedback, tactile spring press depress (`0.92f`), and dynamic 6dp ➔ 12dp elevation.
+> - **Immediate Next Step**: Begin **Task 07: Multi-Item Stacking & Staggered Cascade Motion**.
+> - **Task Card Reference**: [documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md#task-07-multi-item-stacking--staggered-cascade-motion](file:///Users/ahmadnazar/Documents/GitHub/notification-bubble-app/documents/02-planning-and-pm/SPEC_DRIVEN_TASK_CARDS.md).
+> - **Deliverable Target**: Implement `BubbleStack.kt` rendering up to 3 staggered heads (`+8dp` X, `+4dp` Y offset, decaying opacity/scale) following the leader bubble with spring latency.
 
 ---
 

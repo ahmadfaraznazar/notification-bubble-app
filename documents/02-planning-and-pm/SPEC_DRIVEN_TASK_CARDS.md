@@ -176,7 +176,7 @@ Every task card is atomic, completable in a single focused session, and touches 
   - `UnreadCounterBadge`: High-contrast pill badge anchored at top-right for count $> 1$.
 - **Verification**: Compose Preview renders all three visual atoms cleanly across light/dark themes.
 
-#### [ ] Task 06: Interactive Molecule `FloatingBubbleItem` with Haptic Feedback
+#### [x] Task 06: Interactive Molecule `FloatingBubbleItem` with Haptic Feedback
 - **User Story Reference**: Story 5, 6
 - **Files Touched**: `ui/molecules/FloatingBubbleItem.kt`
 - **Acceptance Criteria**:
